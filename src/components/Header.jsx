@@ -29,9 +29,7 @@ const Header = () => {
   const navLinkClass = ({ isActive }) =>
     cn(
       'font-semibold transition-colors',
-      isActive
-        ? 'text-primary'
-        : 'text-secondary-foreground/80 hover:text-white'
+      isActive ? 'text-primary' : 'text-secondary-foreground/80 hover:text-white'
     );
 
   return (
@@ -45,7 +43,7 @@ const Header = () => {
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-2">
           <Clapperboard className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-black tracking-tighter text-white">IronPLay</span>
+          <span className="text-2xl font-black tracking-tighter text-white">IronPlay</span>
         </NavLink>
 
         {/* Desktop nav */}
@@ -63,7 +61,7 @@ const Header = () => {
             onClick={handleLoginClick}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold transition-all duration-300 transform hover:scale-105 rounded-full px-6"
           >
-            Login
+            Conecte-se
           </Button>
         </div>
 
@@ -82,35 +80,34 @@ const Header = () => {
       {/* Mobile dropdown menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
+          <motion.nav
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mt-4 overflow-hidden border-t border-white/10"
+            className="md:hidden mt-4 bg-black border-t border-white/10 px-4 py-4 flex flex-col gap-3"
           >
-            <nav className="flex flex-col gap-4 px-2 py-4 bg-black">
-              {navLinks.map(link => (
-                <NavLink
-                  key={link.name}
-                  to={link.path}
-                  className="text-white font-medium px-4 py-2 hover:bg-white/10 rounded transition"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.name}
-                </NavLink>
-              ))}
-              <Button
-                onClick={() => {
-                  handleLoginClick();
-                  setIsMenuOpen(false);
-                }}
-                className="mt-2 mx-4 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-full"
+            {navLinks.map(link => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                onClick={() => setIsMenuOpen(false)}
+                className="text-white text-base font-medium px-2 py-1 hover:text-primary"
               >
-                Login
-              </Button>
-            </nav>
-          </motion.div>
+                {link.name}
+              </NavLink>
+            ))}
+
+            <Button
+              onClick={() => {
+                handleLoginClick();
+                setIsMenuOpen(false);
+              }}
+              className="mt-4 bg-primary text-primary-foreground rounded-full"
+            >
+              Conecte-se
+            </Button>
+          </motion.nav>
         )}
       </AnimatePresence>
     </motion.header>

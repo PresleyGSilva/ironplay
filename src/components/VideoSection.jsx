@@ -7,7 +7,6 @@ const VideoSection = () => {
   const [trailers, setTrailers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const playerRef = useRef(null);
-  const iframeContainerRef = useRef(null);
 
   const loadYouTubeAPI = () => {
     return new Promise((resolve) => {
@@ -29,7 +28,7 @@ const VideoSection = () => {
           `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
         );
         const data = await res.json();
-        const movies = data.results.slice(0, 5);
+        const movies = data.results.slice(0, 10); // você pode aumentar aqui
 
         const trailerKeys = [];
 
@@ -53,7 +52,6 @@ const VideoSection = () => {
     fetchTrailers();
   }, []);
 
-  // Quando mudar de trailer, reinicializa o player
   useEffect(() => {
     if (trailers.length === 0) return;
 
@@ -67,9 +65,16 @@ const VideoSection = () => {
         playerVars: {
           autoplay: 1,
           mute: 1,
+          controls: 0,        // ⛔ remove controles do usuário
+          modestbranding: 1,  // ✅ remove logo do YouTube
           rel: 0,
+          fs: 0,              // ⛔ desativa fullscreen
+          disablekb: 1,       // ⛔ desativa teclado
         },
         events: {
+          onReady: (event) => {
+            event.target.playVideo();
+          },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.ENDED) {
               // Vai para o próximo trailer
@@ -103,8 +108,7 @@ const VideoSection = () => {
         >
           <div
             id="yt-player"
-            ref={iframeContainerRef}
-            className="w-full h-full"
+            className="w-full h-full pointer-events-none" // ⛔ impede clique no player
           />
         </motion.div>
       </div>
