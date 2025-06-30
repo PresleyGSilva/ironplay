@@ -6,6 +6,7 @@ const API_KEY = 'c102aa0db01dee2c30776db9ae79249e';
 const VideoSection = () => {
   const [trailers, setTrailers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const playerRef = useRef(null);
 
   const loadYouTubeAPI = () => {
@@ -28,7 +29,7 @@ const VideoSection = () => {
           `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
         );
         const data = await res.json();
-        const movies = data.results.slice(0, 10); // você pode aumentar aqui
+        const movies = data.results.slice(0, 10);
 
         const trailerKeys = [];
 
@@ -64,12 +65,12 @@ const VideoSection = () => {
         videoId: trailers[currentIndex],
         playerVars: {
           autoplay: 1,
-          mute: 1,
-          controls: 0,        // ⛔ remove controles do usuário
-          modestbranding: 1,  // ✅ remove logo do YouTube
+          mute: isMuted ? 1 : 0,
+          controls: 0,
+          modestbranding: 1,
           rel: 0,
-          fs: 0,              // ⛔ desativa fullscreen
-          disablekb: 1,       // ⛔ desativa teclado
+          fs: 0,
+          disablekb: 1,
         },
         events: {
           onReady: (event) => {
@@ -77,24 +78,23 @@ const VideoSection = () => {
           },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.ENDED) {
-              // Vai para o próximo trailer
               setCurrentIndex((prev) => (prev + 1) % trailers.length);
             }
           },
         },
       });
     });
-  }, [trailers, currentIndex]);
+  }, [trailers, currentIndex, isMuted]);
 
   return (
-    <section className="py-20 md:py-28 text-center">
+    <section className="py-20 md:py-28 text-center relative">
       <div className="container">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-5xl font-black tracking-tighter"
+          className="text-3xl md:text-5xl font-black tracking-tighter text-white"
         >
           Assista aos Trailers em Destaque
         </motion.h2>
@@ -104,12 +104,20 @@ const VideoSection = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-12 aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl shadow-primary/10 border border-white/10"
+          className="mt-12 aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl shadow-primary/10 border border-white/10 relative"
         >
           <div
             id="yt-player"
-            className="w-full h-full pointer-events-none" // ⛔ impede clique no player
+            className="w-full h-full pointer-events-none"
           />
+          {isMuted && (
+            <button
+              onClick={() => setIsMuted(false)}
+              className="absolute bottom-4 right-4 z-10 bg-black/70 text-white text-sm px-4 py-2 rounded shadow hover:bg-black"
+            >
+              🔊 Ativar som
+            </button>
+          )}
         </motion.div>
       </div>
     </section>
