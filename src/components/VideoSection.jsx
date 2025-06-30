@@ -29,7 +29,7 @@ const VideoSection = () => {
           `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
         );
         const data = await res.json();
-        const movies = data.results.slice(0, 10);
+        const movies = data.results.slice(0, 10); // Pega 10 trailers
 
         const trailerKeys = [];
 
@@ -53,6 +53,7 @@ const VideoSection = () => {
     fetchTrailers();
   }, []);
 
+  // Recria o player ao trocar trailer ou mute
   useEffect(() => {
     if (trailers.length === 0) return;
 
@@ -106,18 +107,16 @@ const VideoSection = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mt-12 aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl shadow-primary/10 border border-white/10 relative"
         >
-          <div
-            id="yt-player"
-            className="w-full h-full pointer-events-none"
-          />
-          {isMuted && (
-            <button
-              onClick={() => setIsMuted(false)}
-              className="absolute bottom-4 right-4 z-10 bg-black/70 text-white text-sm px-4 py-2 rounded shadow hover:bg-black"
-            >
-              🔊 Ativar som
-            </button>
-          )}
+          {/* Player YouTube invisível ao clique */}
+          <div id="yt-player" className="w-full h-full pointer-events-none" />
+
+          {/* Botão de volume */}
+          <button
+            onClick={() => setIsMuted((prev) => !prev)}
+            className="absolute bottom-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-sm md:text-base"
+          >
+            {isMuted ? '🔇 Ativar som' : '🔊 Desativar som'}
+          </button>
         </motion.div>
       </div>
     </section>
