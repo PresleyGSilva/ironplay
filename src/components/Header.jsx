@@ -77,36 +77,46 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile dropdown menu - lateral */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.nav
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
+            initial={{ x: '100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '100%', opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mt-4 bg-black border-t border-white/10 px-4 py-4 flex flex-col gap-3"
+            className="fixed top-0 right-0 h-full w-[80%] bg-black z-50 flex flex-col px-6 py-8 shadow-lg md:hidden"
           >
-            {navLinks.map(link => (
-              <NavLink
-                key={link.name}
-                to={link.path}
-                onClick={() => setIsMenuOpen(false)}
-                className="text-white text-base font-medium px-2 py-1 hover:text-primary"
-              >
-                {link.name}
-              </NavLink>
-            ))}
-
-            <Button
-              onClick={() => {
-                handleLoginClick();
-                setIsMenuOpen(false);
-              }}
-              className="mt-4 bg-primary text-primary-foreground rounded-full"
+            <button
+              onClick={() => setIsMenuOpen(false)}
+              className="self-end mb-4 text-white"
+              aria-label="Fechar menu"
             >
-              Conecte-se
-            </Button>
+              <X size={28} />
+            </button>
+
+            <div className="flex flex-col gap-4">
+              {navLinks.map(link => (
+                <NavLink
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-white text-base font-medium px-2 py-1 hover:text-primary"
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+
+              <Button
+                onClick={() => {
+                  handleLoginClick();
+                  setIsMenuOpen(false);
+                }}
+                className="mt-6 bg-primary text-primary-foreground rounded-full"
+              >
+                Conecte-se
+              </Button>
+            </div>
           </motion.nav>
         )}
       </AnimatePresence>
