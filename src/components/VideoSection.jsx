@@ -5,7 +5,8 @@ const API_KEY = 'c102aa0db01dee2c30776db9ae79249e';
 
 const VideoSection = () => {
   const [trailers, setTrailers] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * 10));
+  const [shownKeys, setShownKeys] = useState(new Set()); // Armazena trailers já exibidos
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const playerRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -24,44 +25,59 @@ const VideoSection = () => {
     });
   };
 
+  const fetchTrailers = async () => {
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
+      );
+      const data = await res.json();
+      const movies = data.results || [];
+
+      const newTrailers = [];
+
+      for (const movie of movies) {
+        const resVideo = await fetch(
+          `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=pt-BR`
+        );
+        const videoData = await resVideo.json();
+        const trailer = videoData.results?.find(
+          (v) => v.type === 'Trailer' && v.site === 'YouTube' && !shownKeys.has(v.key)
+        );
+        if (trailer) {
+          newTrailers.push({ key: trailer.key });
+        }
+      }
+
+      if (newTrailers.length > 0) {
+        setTrailers(newTrailers);
+        setShownKeys((prev) => {
+          const updated = new Set(prev);
+          newTrailers.forEach((t) => updated.add(t.key));
+          return updated;
+        });
+        setCurrentIndex(0); // começa do primeiro dos novos
+      } else {
+        setCurrentIndex(0); // se não achar novos, reinicia os mesmos
+      }
+    } catch (err) {
+      console.error('Erro ao buscar trailers:', err);
+    }
+  };
+
   const nextTrailer = () => {
-    setCurrentIndex((prev) => {
-      const nextIndex = prev + 1;
-      return nextIndex < trailers.length ? nextIndex : prev; // não repetir
-    });
-    setFadeKey((prev) => prev + 1);
+    if (trailers.length === 0) return;
+
+    const nextIndex = currentIndex + 1;
+    if (nextIndex < trailers.length) {
+      setCurrentIndex(nextIndex);
+      setFadeKey((prev) => prev + 1);
+    } else {
+      // chegou no fim da lista
+      fetchTrailers(); // busca novos
+    }
   };
 
   useEffect(() => {
-    const fetchTrailers = async () => {
-      try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
-        );
-        const data = await res.json();
-        const movies = data.results.slice(0, 10);
-
-        const trailerData = [];
-
-        for (const movie of movies) {
-          const resVideo = await fetch(
-            `https://api.themoviedb.org/3/movie/${movie.id}/videos?api_key=${API_KEY}&language=pt-BR`
-          );
-          const videoData = await resVideo.json();
-          const trailer = videoData.results.find(
-            (v) => v.type === 'Trailer' && v.site === 'YouTube'
-          );
-          if (trailer) {
-            trailerData.push({ key: trailer.key });
-          }
-        }
-
-        setTrailers(trailerData);
-      } catch (err) {
-        console.error('Erro ao buscar trailers:', err);
-      }
-    };
-
     fetchTrailers();
   }, []);
 
@@ -88,7 +104,7 @@ const VideoSection = () => {
             event.target.playVideo();
             timeoutRef.current = setTimeout(() => {
               nextTrailer();
-            }, 70000);
+            }, 70000); // muda mesmo que o vídeo não acabe
           },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.ENDED) {
@@ -131,6 +147,7 @@ const VideoSection = () => {
             </motion.div>
           </AnimatePresence>
 
+          {/* Botão de volume */}
           <button
             onClick={() => setIsMuted((prev) => !prev)}
             className="absolute bottom-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-sm md:text-base"

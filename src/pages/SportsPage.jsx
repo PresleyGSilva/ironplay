@@ -23,16 +23,14 @@ const SportsPage = () => {
           let url = '';
 
           if (cat.sport) {
-            // Futebol e UFC usam busca por data e esporte
             url = `https://www.thesportsdb.com/api/v1/json/1/eventsday.php?d=${today}&s=${cat.sport}`;
           } else if (cat.leagueId) {
-            // NBA e F1 usam busca por próximos eventos da liga
             url = `https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=${cat.leagueId}`;
           }
 
           const res = await fetch(url);
           const data = await res.json();
-          dataMap[cat.title] = data.events?.slice(0, 5) || []; // limitar a 5 eventos
+          dataMap[cat.title] = data.events?.slice(0, 5) || [];
         } catch (err) {
           console.error(`Erro ao buscar eventos para ${cat.title}`, err);
           dataMap[cat.title] = [];
