@@ -56,8 +56,7 @@ const VideoSection = () => {
         });
         setCurrentIndex(0);
       } else {
-        // reinicia do início se não encontrar novos
-        setCurrentIndex(0);
+        setCurrentIndex(0); // reinicia do começo se não achar novos
       }
     } catch (err) {
       console.error('Erro ao buscar trailers:', err);
@@ -66,13 +65,14 @@ const VideoSection = () => {
 
   const nextTrailer = () => {
     if (trailers.length === 0) return;
+
     const nextIndex = currentIndex + 1;
     if (nextIndex < trailers.length) {
       setCurrentIndex(nextIndex);
     } else {
-      fetchTrailers(); // busca novos trailers se esgotar
+      fetchTrailers(); // busca mais se esgotar
     }
-    setFadeKey((prev) => prev + 1);
+    setFadeKey((prev) => prev + 1); // força atualização visual
   };
 
   useEffect(() => {
@@ -83,9 +83,11 @@ const VideoSection = () => {
     if (trailers.length === 0) return;
 
     loadYouTubeAPI().then((YT) => {
-      if (playerRef.current) playerRef.current.destroy();
+      if (playerRef.current) {
+        playerRef.current.destroy();
+      }
 
-      playerRef.current = new YT.Player('yt-player', {
+      playerRef.current = new YT.Player(`yt-player-${fadeKey}`, {
         videoId: trailers[currentIndex]?.key,
         playerVars: {
           autoplay: 1,
@@ -109,10 +111,11 @@ const VideoSection = () => {
       });
     });
 
+    // cleanup
     return () => {
       if (playerRef.current) playerRef.current.destroy();
     };
-  }, [trailers, currentIndex, isMuted]);
+  }, [trailers, currentIndex, isMuted, fadeKey]);
 
   return (
     <section className="py-20 md:py-28 text-center relative">
@@ -137,10 +140,14 @@ const VideoSection = () => {
               transition={{ duration: 0.5 }}
               className="w-full h-full"
             >
-              <div id="yt-player" className="w-full h-full pointer-events-none" />
+              <div
+                id={`yt-player-${fadeKey}`}
+                className="w-full h-full pointer-events-none"
+              />
             </motion.div>
           </AnimatePresence>
 
+          {/* Botão de volume */}
           <button
             onClick={() => setIsMuted((prev) => !prev)}
             className="absolute bottom-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-sm md:text-base"

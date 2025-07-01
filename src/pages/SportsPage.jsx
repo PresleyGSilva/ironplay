@@ -1,53 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
-const CATEGORIES = [
-  { title: 'Futebol (Soccer)', sport: 'Soccer' },
-  { title: 'UFC / MMA', sport: 'Fighting' },
-  { title: 'NBA (Basquete)', leagueId: '4387' },
-  { title: 'Fórmula 1', leagueId: '4414' },
+const canaisEsportivos = [
+  {
+    nome: 'ESPN',
+    descricao: 'Esportes americanos, futebol, NBA, NFL e mais.',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_wordmark.svg',
+  },
+  {
+    nome: 'SporTV',
+    descricao: 'Transmissões ao vivo do Brasileirão, Copa do Brasil e mais.',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/SporTV_logo_2021.svg',
+  },
+  {
+    nome: 'Premiere FC',
+    descricao: 'Pay-per-view com todos os jogos do Brasileirão e estaduais.',
+    logo: 'https://logodownload.org/wp-content/uploads/2017/11/premiere-logo-1.png',
+  },
+  {
+    nome: 'Combate',
+    descricao: 'Canal oficial do UFC ao vivo e outros eventos de lutas.',
+    logo: 'https://logodownload.org/wp-content/uploads/2020/10/combate-logo.png',
+  },
+  {
+    nome: 'BandSports',
+    descricao: 'Fórmula 1, futebol internacional e esportes olímpicos.',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/BandSports_logo_2011.png',
+  },
+  {
+    nome: 'Fox Sports',
+    descricao: 'Campeonatos internacionais e programas esportivos exclusivos.',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/6/67/Fox_Sports_logo.svg',
+  },
+  {
+    nome: 'TNT Sports',
+    descricao: 'Champions League, Paulistão e torneios internacionais.',
+    logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/TNT_Sports_logo_2021.svg',
+  },
 ];
 
 const SportsPage = () => {
-  const [gamesByCategory, setGamesByCategory] = useState({});
-
-  useEffect(() => {
-    const today = new Date().toISOString().split('T')[0];
-
-    const fetchData = async () => {
-      const dataMap = {};
-
-      for (const cat of CATEGORIES) {
-        try {
-          let url = '';
-
-          if (cat.sport) {
-            url = `https://www.thesportsdb.com/api/v1/json/1/eventsday.php?d=${today}&s=${cat.sport}`;
-          } else if (cat.leagueId) {
-            url = `https://www.thesportsdb.com/api/v1/json/1/eventsnextleague.php?id=${cat.leagueId}`;
-          }
-
-          const res = await fetch(url);
-          const data = await res.json();
-          dataMap[cat.title] = data.events?.slice(0, 5) || [];
-        } catch (err) {
-          console.error(`Erro ao buscar eventos para ${cat.title}`, err);
-          dataMap[cat.title] = [];
-        }
-      }
-
-      setGamesByCategory(dataMap);
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <>
       <Helmet>
-        <title>Agenda Esportiva - IronPlay</title>
-        <meta name="description" content="Confira os próximos jogos e eventos esportivos de hoje: futebol, UFC, NBA, F1 e muito mais!" />
+        <title>Canais Esportivos - IronPlay</title>
+        <meta name="description" content="Confira todos os canais esportivos disponíveis no IPTV IronPlay." />
       </Helmet>
 
       <div className="container py-12 md:py-20 text-white">
@@ -55,39 +54,52 @@ const SportsPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-6xl font-black tracking-tighter text-center mb-12"
+          className="text-4xl md:text-6xl font-black tracking-tighter text-center mb-6"
         >
-          Agenda Esportiva de Hoje 🏆
+          📺 Canais Esportivos ao Vivo
         </motion.h1>
 
-        {Object.entries(gamesByCategory).map(([category, events], index) => (
-          <motion.div
-            key={category}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="mb-12"
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-lg text-secondary text-center max-w-2xl mx-auto mb-12"
+        >
+          Aproveite os melhores canais esportivos com transmissão ao vivo dos maiores eventos do mundo. Tudo isso em um só lugar com qualidade e estabilidade!
+        </motion.p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {canaisEsportivos.map((canal, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="bg-black/40 p-6 rounded-xl border border-white/10 shadow-lg flex flex-col items-center text-center"
+            >
+              <img src={canal.logo} alt={canal.nome} className="h-14 mb-4 object-contain" />
+              <h3 className="text-xl font-bold mb-2">{canal.nome}</h3>
+              <p className="text-sm text-secondary">{canal.descricao}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Botão para Planos */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="text-center mt-16"
+        >
+          <Link
+            to="/planos"
+            className="inline-block bg-primary hover:bg-primary/80 text-white font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-md"
           >
-            <h2 className="text-2xl font-bold mb-4 border-b border-white/10 pb-2">{category}</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              {events.length > 0 ? (
-                events.map((event) => (
-                  <div
-                    key={event.idEvent}
-                    className="bg-black/40 p-4 rounded-lg border border-white/10"
-                  >
-                    <h3 className="text-lg font-semibold mb-1">{event.strEvent}</h3>
-                    <p className="text-sm text-secondary">{event.strLeague}</p>
-                    <p className="text-sm mt-2">⏰ {event.strTime?.slice(0, 5) || 'Sem horário'} - 📍 {event.strVenue || 'Local indefinido'}</p>
-                  </div>
-                ))
-              ) : (
-                <p className="text-white col-span-full">Nenhum evento encontrado.</p>
-              )}
-            </div>
-          </motion.div>
-        ))}
+            📲 Quero Assinar Agora
+          </Link>
+        </motion.div>
       </div>
     </>
   );
