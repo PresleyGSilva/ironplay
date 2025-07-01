@@ -17,13 +17,13 @@ const BenefitCard = ({ icon, title, description, index }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5, delay: index * 0.1 }}
-    className="p-6 rounded-lg bg-card border border-white/10 flex flex-col items-center text-center gap-4"
+    className="bg-card p-6 rounded-xl border border-white/10 shadow-lg flex flex-col items-center text-center gap-6"
   >
     <div className="p-4 rounded-full bg-primary/10">
       {icon}
     </div>
-    <span className="text-xl font-bold">{title}</span>
-    <p className="text-secondary">{description}</p>
+    <span className="text-2xl font-semibold text-white">{title}</span>
+    <p className="text-secondary text-sm">{description}</p>
   </motion.div>
 );
 
@@ -31,12 +31,32 @@ const Benefits = () => {
   return (
     <section className="py-20 md:py-28 relative bg-black/30">
       <div className="glow-effect"></div>
-      <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="container text-center">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl md:text-5xl font-black tracking-tighter text-white mb-12"
+        >
+          A DinoFlick é diferente de tudo o que você já viu
+        </motion.h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {benefits.map((benefit, index) => (
             <BenefitCard key={index} index={index} {...benefit} />
           ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8"
+        >
+          <button className="bg-primary text-white text-xl font-bold py-3 px-10 rounded-full hover:bg-primary/80 transition-all duration-300">
+            Adquira o Seu Agora
+          </button>
+        </motion.div>
       </div>
     </section>
   );
