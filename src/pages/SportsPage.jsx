@@ -14,13 +14,15 @@ const SportsPage = () => {
   const [games, setGames] = useState([]);
 
   useEffect(() => {
+    const today = new Date().toISOString().split('T')[0];
+
     const fetchGames = async () => {
       try {
-        const res = await fetch('https://www.thesportsdb.com/api/v1/json/1/eventsday.php?d=2025-07-01&s=Soccer');
+        const res = await fetch(`https://www.thesportsdb.com/api/v1/json/1/eventsday.php?d=${today}&s=Soccer`);
         const data = await res.json();
         setGames(data.events || []);
-      } catch (err) {
-        console.error('Erro ao buscar jogos:', err);
+      } catch (error) {
+        console.error('Erro ao buscar jogos do dia:', error);
       }
     };
 
@@ -35,7 +37,6 @@ const SportsPage = () => {
       </Helmet>
 
       <div className="container py-12 md:py-20">
-        {/* Cabeçalho */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -54,7 +55,7 @@ const SportsPage = () => {
           A emoção do esporte ao seu alcance. Não perca nenhum lance do seu time ou atleta favorito com a nossa cobertura completa.
         </motion.p>
 
-        {/* Cartões de modalidades */}
+        {/* Ícones principais */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
           {sports.map((sport, index) => (
             <motion.div
@@ -74,28 +75,32 @@ const SportsPage = () => {
           ))}
         </div>
 
-        {/* NOVA SEÇÃO: Jogos do Dia */}
+        {/* Jogos de hoje com TheSportsDB */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="mb-12"
         >
-          <h2 className="text-3xl font-bold text-center mb-8">Jogos de Hoje</h2>
-          {games.length === 0 ? (
-            <p className="text-center text-secondary">Carregando jogos...</p>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {games.map((game, i) => (
-                <div key={i} className="bg-card p-6 rounded-lg border border-white/10">
-                  <h3 className="text-xl font-bold mb-1">{game.strEvent}</h3>
-                  <p className="text-secondary text-sm mb-1">{game.strLeague}</p>
-                  <p className="text-sm text-primary">⏰ {game.dateEvent} às {game.strTime}</p>
+          <h2 className="text-3xl text-white font-bold text-center mb-6">
+            🗓️ Jogos de Hoje - Futebol
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {games.length > 0 ? (
+              games.map((game) => (
+                <div
+                  key={game.idEvent}
+                  className="bg-black/50 border border-white/10 p-4 rounded-lg text-white shadow-sm"
+                >
+                  <h3 className="text-xl font-semibold">{game.strEvent}</h3>
+                  <p className="text-sm text-secondary">{game.strLeague}</p>
+                  <p className="mt-2 text-sm">⏰ {game.strTime?.slice(0, 5)} - 📍 {game.strVenue}</p>
                 </div>
-              ))}
-            </div>
-          )}
+              ))
+            ) : (
+              <p className="text-center text-white col-span-full">Nenhum jogo encontrado para hoje.</p>
+            )}
+          </div>
         </motion.div>
       </div>
     </>
