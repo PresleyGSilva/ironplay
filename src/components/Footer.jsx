@@ -24,18 +24,20 @@ const Footer = () => {
 
         {/* Formas de pagamento */}
         <div className="mt-6 flex justify-center gap-6 flex-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Visa_Inc._logo.svg" alt="Visa" className="h-8" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Mastercard_Logo.svg" alt="MasterCard" className="h-8" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Logo_elo.svg" alt="Elo" className="h-8" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Amex-logo.svg" alt="Amex" className="h-8" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Hipercard_logo.svg" alt="Hiper" className="h-8" />
+          <img
+            src="https://oficialcineflick.com/wp-content/uploads/2024/12/FORMA-DE-PAGAMENTO.webp"
+            alt="Formas de pagamento"
+            className="h-8 sm:h-10 md:h-12"
+          />
         </div>
 
-        {/* Site Seguro */}
-        <div className="mt-4 flex justify-center gap-6 flex-wrap">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Google_Chrome_logo.svg" alt="Google Site Seguro" className="h-8" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Ssl-logo.svg" alt="SSL" className="h-8" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Logo_Site_Blindado.svg" alt="Site Blindado" className="h-8" />
+        {/* Selo de site seguro */}
+        <div className="mt-6 flex justify-center gap-6 flex-wrap">
+          <img
+            src="https://oficialcineflick.com/wp-content/uploads/2024/12/SELO-SITE-SEGURO.webp"
+            alt="Selo de site seguro"
+            className="h-8 sm:h-10 md:h-12"
+          />
         </div>
 
         {/* Textos explicativos */}
@@ -49,7 +51,7 @@ const Footer = () => {
         </div>
 
         {/* Links de Política e Termos */}
-        <div className="flex gap-6 mt-6">
+        <div className="flex gap-6 mt-6 flex-wrap justify-center">
           <button
             onClick={() => handleLinkClick('Política de Privacidade')}
             className="text-secondary hover:text-white transition-colors"
