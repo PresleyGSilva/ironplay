@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const API_KEY = 'c102aa0db01dee2c30776db9ae79249e';
 
 const VideoSection = () => {
   const [trailers, setTrailers] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(() => Math.floor(Math.random() * 10));
   const [isMuted, setIsMuted] = useState(true);
   const playerRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const [fadeKey, setFadeKey] = useState(0);
 
   const loadYouTubeAPI = () => {
     return new Promise((resolve) => {
@@ -22,6 +24,11 @@ const VideoSection = () => {
     });
   };
 
+  const nextTrailer = () => {
+    setCurrentIndex((prev) => (prev + 1) % trailers.length);
+    setFadeKey((prev) => prev + 1); // força fade
+  };
+
   useEffect(() => {
     const fetchTrailers = async () => {
       try {
@@ -29,9 +36,9 @@ const VideoSection = () => {
           `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
         );
         const data = await res.json();
-        const movies = data.results.slice(0, 10); // Pega 10 trailers
+        const movies = data.results.slice(0, 10);
 
-        const trailerKeys = [];
+        const trailerData = [];
 
         for (const movie of movies) {
           const resVideo = await fetch(
@@ -41,10 +48,12 @@ const VideoSection = () => {
           const trailer = videoData.results.find(
             (v) => v.type === 'Trailer' && v.site === 'YouTube'
           );
-          if (trailer) trailerKeys.push(trailer.key);
+          if (trailer) {
+            trailerData.push({ key: trailer.key, title: movie.title });
+          }
         }
 
-        setTrailers(trailerKeys);
+        setTrailers(trailerData);
       } catch (err) {
         console.error('Erro ao buscar trailers:', err);
       }
@@ -53,17 +62,15 @@ const VideoSection = () => {
     fetchTrailers();
   }, []);
 
-  // Recria o player ao trocar trailer ou mute
   useEffect(() => {
     if (trailers.length === 0) return;
 
     loadYouTubeAPI().then((YT) => {
-      if (playerRef.current) {
-        playerRef.current.destroy();
-      }
+      if (playerRef.current) playerRef.current.destroy();
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       playerRef.current = new YT.Player('yt-player', {
-        videoId: trailers[currentIndex],
+        videoId: trailers[currentIndex]?.key,
         playerVars: {
           autoplay: 1,
           mute: isMuted ? 1 : 0,
@@ -76,16 +83,25 @@ const VideoSection = () => {
         events: {
           onReady: (event) => {
             event.target.playVideo();
+            timeoutRef.current = setTimeout(() => {
+              nextTrailer();
+            }, 70000);
           },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.ENDED) {
-              setCurrentIndex((prev) => (prev + 1) % trailers.length);
+              nextTrailer();
             }
           },
         },
       });
     });
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [trailers, currentIndex, isMuted]);
+
+  const currentTitle = trailers[currentIndex]?.title || '';
 
   return (
     <section className="py-20 md:py-28 text-center relative">
@@ -100,15 +116,19 @@ const VideoSection = () => {
           Assista aos Trailers em Destaque
         </motion.h2>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="mt-12 aspect-video w-full max-w-4xl mx-auto rounded-lg overflow-hidden shadow-2xl shadow-primary/10 border border-white/10 relative"
-        >
-          {/* Player YouTube invisível ao clique */}
-          <div id="yt-player" className="w-full h-full pointer-events-none" />
+        <div className="mt-12 max-w-4xl mx-auto relative aspect-video rounded-lg overflow-hidden shadow-2xl shadow-primary/10 border border-white/10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={fadeKey}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+              className="w-full h-full"
+            >
+              <div id="yt-player" className="w-full h-full pointer-events-none" />
+            </motion.div>
+          </AnimatePresence>
 
           {/* Botão de volume */}
           <button
@@ -116,6 +136,28 @@ const VideoSection = () => {
             className="absolute bottom-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-sm md:text-base"
           >
             {isMuted ? '🔇 Ativar som' : '🔊 Desativar som'}
+          </button>
+        </div>
+
+        {/* Nome do filme atual */}
+        {currentTitle && (
+          <p className="mt-6 text-lg md:text-xl text-white font-semibold">
+            🎬 {currentTitle}
+          </p>
+        )}
+
+        {/* Botão de próximo */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="mt-4"
+        >
+          <button
+            onClick={nextTrailer}
+            className="bg-primary hover:bg-primary/80 text-white font-bold px-6 py-2 rounded-full transition-all duration-300 shadow-md"
+          >
+            Próximo trailer →
           </button>
         </motion.div>
       </div>

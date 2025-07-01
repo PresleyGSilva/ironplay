@@ -9,6 +9,8 @@ const IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
 
 const MovieGallery = () => {
   const [movies, setMovies] = useState([]);
+  const [selectedTrailer, setSelectedTrailer] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   const fetchMovies = async () => {
     try {
@@ -22,12 +24,30 @@ const MovieGallery = () => {
     }
   };
 
+  const handleMovieClick = async (movieId) => {
+    try {
+      const res = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}&language=pt-BR`
+      );
+      const data = await res.json();
+      const trailer = data.results.find(
+        (v) => v.type === 'Trailer' && v.site === 'YouTube'
+      );
+      if (trailer) {
+        setSelectedTrailer(trailer.key);
+        setShowModal(true);
+      } else {
+        alert('Trailer não encontrado.');
+      }
+    } catch (error) {
+      console.error('Erro ao carregar trailer:', error);
+    }
+  };
+
   useEffect(() => {
-    fetchMovies(); // Carrega ao iniciar
-
-    const interval = setInterval(fetchMovies, 60000); // Atualiza a cada 60 segundos
-
-    return () => clearInterval(interval); // Limpa o intervalo ao desmontar
+    fetchMovies();
+    const interval = setInterval(fetchMovies, 60000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -54,7 +74,10 @@ const MovieGallery = () => {
         >
           {movies.map((movie) => (
             <SwiperSlide key={movie.id}>
-              <div className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-lg">
+              <div
+                onClick={() => handleMovieClick(movie.id)}
+                className="relative aspect-[2/3] rounded-lg overflow-hidden shadow-lg cursor-pointer"
+              >
                 <img
                   src={
                     movie.poster_path
@@ -72,6 +95,31 @@ const MovieGallery = () => {
           ))}
         </Swiper>
       </div>
+
+      {/* Modal do trailer */}
+      {showModal && selectedTrailer && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center px-4">
+          <div className="relative w-full max-w-3xl aspect-video bg-black rounded-lg overflow-hidden shadow-xl">
+            <iframe
+              className="w-full h-full"
+              src={`https://www.youtube.com/embed/${selectedTrailer}?autoplay=1`}
+              title="Trailer do Filme"
+              frameBorder="0"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            ></iframe>
+            <button
+              onClick={() => {
+                setShowModal(false);
+                setSelectedTrailer(null);
+              }}
+              className="absolute top-2 right-2 bg-white text-black rounded-full px-2 py-1 text-xs hover:bg-red-500 hover:text-white"
+            >
+              ✕ Fechar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
