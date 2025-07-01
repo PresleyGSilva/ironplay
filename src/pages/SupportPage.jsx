@@ -6,19 +6,26 @@ import { LifeBuoy, MessageSquare, Phone } from 'lucide-react';
 import Faq from '@/components/Faq';
 import { useToast } from '@/components/ui/use-toast';
 
-
 const SupportPage = () => {
-    const { toast } = useToast();
-    const handleActionClick = (channel) => {
-        toast({
-            title: "Canal de Suporte 🚧",
-            description: `O suporte via ${channel} ainda não está configurado.`,
-        });
-    };
+  const { toast } = useToast();
+
+  // Função de redirecionamento para o link do Telegram
+  const handleRedirectToTelegram = () => {
+    // Redireciona para o Telegram
+    window.location.href = "https://t.me/SuporteCineFlick"; // Link do chat do Telegram
+  };
+
+  const handleActionClick = (channel) => {
+    toast({
+      title: "Canal de Suporte 🚧",
+      description: `O suporte via ${channel} ainda não está configurado.`,
+    });
+  };
+
   return (
     <>
       <Helmet>
-        <title>Suporte - IfinitPlay</title>
+        <title>Suporte - IronPlay</title>
         <meta name="description" content="Precisa de ajuda? Entre em contato com nossa equipe de suporte ou consulte nossas perguntas frequentes." />
       </Helmet>
       <div className="container py-12 md:py-20">
@@ -47,13 +54,23 @@ const SupportPage = () => {
                 <MessageSquare className="h-12 w-12 text-primary mb-4" />
                 <h2 className="text-2xl font-bold mb-2">Chat Ao Vivo</h2>
                 <p className="text-secondary mb-6">Fale com um de nossos especialistas agora mesmo.</p>
-                <Button onClick={() => handleActionClick('Chat')} className="bg-primary hover:bg-primary/90 rounded-full font-bold px-8">Iniciar Chat</Button>
+                <Button 
+                  onClick={handleRedirectToTelegram} 
+                  className="bg-primary hover:bg-primary/90 rounded-full font-bold px-8"
+                >
+                  Iniciar Chat
+                </Button>
             </div>
              <div className="bg-card p-8 rounded-lg border border-white/10 flex flex-col items-center text-center">
                 <Phone className="h-12 w-12 text-primary mb-4" />
                 <h2 className="text-2xl font-bold mb-2">Telefone</h2>
                 <p className="text-secondary mb-6">Ligue para nossa central de atendimento.</p>
-                <Button onClick={() => handleActionClick('Telefone')} className="bg-primary hover:bg-primary/90 rounded-full font-bold px-8">Ver Número</Button>
+                <Button 
+                  onClick={() => handleActionClick('Telefone')} 
+                  className="bg-primary hover:bg-primary/90 rounded-full font-bold px-8"
+                >
+                  Ver Número
+                </Button>
             </div>
         </motion.div>
 
