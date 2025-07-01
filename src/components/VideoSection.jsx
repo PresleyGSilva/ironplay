@@ -5,11 +5,10 @@ const API_KEY = 'c102aa0db01dee2c30776db9ae79249e';
 
 const VideoSection = () => {
   const [trailers, setTrailers] = useState([]);
-  const [shownKeys, setShownKeys] = useState(new Set()); // Armazena trailers já exibidos
+  const [shownKeys, setShownKeys] = useState(new Set());
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const playerRef = useRef(null);
-  const timeoutRef = useRef(null);
   const [fadeKey, setFadeKey] = useState(0);
 
   const loadYouTubeAPI = () => {
@@ -55,9 +54,10 @@ const VideoSection = () => {
           newTrailers.forEach((t) => updated.add(t.key));
           return updated;
         });
-        setCurrentIndex(0); // começa do primeiro dos novos
+        setCurrentIndex(0);
       } else {
-        setCurrentIndex(0); // se não achar novos, reinicia os mesmos
+        // reinicia do início se não encontrar novos
+        setCurrentIndex(0);
       }
     } catch (err) {
       console.error('Erro ao buscar trailers:', err);
@@ -66,15 +66,13 @@ const VideoSection = () => {
 
   const nextTrailer = () => {
     if (trailers.length === 0) return;
-
     const nextIndex = currentIndex + 1;
     if (nextIndex < trailers.length) {
       setCurrentIndex(nextIndex);
-      setFadeKey((prev) => prev + 1);
     } else {
-      // chegou no fim da lista
-      fetchTrailers(); // busca novos
+      fetchTrailers(); // busca novos trailers se esgotar
     }
+    setFadeKey((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -86,7 +84,6 @@ const VideoSection = () => {
 
     loadYouTubeAPI().then((YT) => {
       if (playerRef.current) playerRef.current.destroy();
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
       playerRef.current = new YT.Player('yt-player', {
         videoId: trailers[currentIndex]?.key,
@@ -102,9 +99,6 @@ const VideoSection = () => {
         events: {
           onReady: (event) => {
             event.target.playVideo();
-            timeoutRef.current = setTimeout(() => {
-              nextTrailer();
-            }, 70000); // muda mesmo que o vídeo não acabe
           },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.ENDED) {
@@ -116,7 +110,7 @@ const VideoSection = () => {
     });
 
     return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (playerRef.current) playerRef.current.destroy();
     };
   }, [trailers, currentIndex, isMuted]);
 
@@ -147,7 +141,6 @@ const VideoSection = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Botão de volume */}
           <button
             onClick={() => setIsMuted((prev) => !prev)}
             className="absolute bottom-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-sm md:text-base"
