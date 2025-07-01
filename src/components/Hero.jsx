@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 const Hero = () => {
   return (
-    <section className="w-full h-[90vh] text-center relative flex items-center justify-center overflow-hidden">
+    <section className="w-full h-[90vh] sm:h-[80vh] lg:h-[75vh] text-center relative flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 w-full h-full">
         <img
           className="w-full h-full object-cover"
@@ -21,11 +21,11 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-6xl font-black tracking-tight text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white">
             A experiência definitiva de entretenimento:
             <span className="text-green-500"> exclusiva, estável e incomparável!</span>
           </h1>
-          <p className="mt-6 max-w-2xl mx-auto text-lg text-gray-300">
+          <p className="mt-6 max-w-xl sm:max-w-2xl mx-auto text-lg text-gray-300">
             Filmes, séries, esportes e mais com qualidade superior e suporte dedicado.
           </p>
         </motion.div>
@@ -37,7 +37,7 @@ const Hero = () => {
           className="mt-10"
         >
           <a href="#planos">
-            <Button size="lg" className="bg-green-500 text-white text-lg font-bold px-10 py-6 rounded-full hover:bg-green-600 transition">
+            <Button size="lg" className="bg-green-500 text-white text-lg font-bold px-8 sm:px-10 py-6 rounded-full hover:bg-green-600 transition">
               ADQUIRA O SEU AGORA
             </Button>
           </a>
