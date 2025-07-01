@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom'; // Para o redirecionamento
 
 const API_KEY = 'c102aa0db01dee2c30776db9ae79249e';
 
@@ -54,7 +55,8 @@ const VideoSection = () => {
           newTrailers.forEach((t) => updated.add(t.key));
           return updated;
         });
-        setCurrentIndex(0);
+        // Embaralhar trailers ou começar com um índice aleatório
+        setCurrentIndex(Math.floor(Math.random() * newTrailers.length));
       } else {
         setCurrentIndex(0); // reinicia do começo se não achar novos
       }
@@ -66,12 +68,8 @@ const VideoSection = () => {
   const nextTrailer = () => {
     if (trailers.length === 0) return;
 
-    const nextIndex = currentIndex + 1;
-    if (nextIndex < trailers.length) {
-      setCurrentIndex(nextIndex);
-    } else {
-      fetchTrailers(); // busca mais se esgotar
-    }
+    const nextIndex = (currentIndex + 1) % trailers.length; // Faz o loop
+    setCurrentIndex(nextIndex);
     setFadeKey((prev) => prev + 1); // força atualização visual
   };
 
@@ -154,6 +152,13 @@ const VideoSection = () => {
           >
             {isMuted ? '🔇 Ativar som' : '🔊 Desativar som'}
           </button>
+
+          {/* Botão "Assista agora" */}
+          <Link to="/planos">
+            <button className="absolute bottom-4 left-4 z-10 bg-primary text-white px-6 py-3 rounded-full shadow-lg text-lg">
+              Assista Agora
+            </button>
+          </Link>
         </div>
       </div>
     </section>
