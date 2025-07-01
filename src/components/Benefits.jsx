@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom'; // Importando o Link do react-router-dom
 import { Server, Clapperboard, Wifi, ShieldOff, Headphones as Headset, HardDrive } from 'lucide-react';
 
 const benefits = [
@@ -53,9 +54,12 @@ const Benefits = () => {
           transition={{ delay: 0.5 }}
           className="mt-8"
         >
-          <button className="bg-primary text-white text-xl font-bold py-3 px-10 rounded-full hover:bg-primary/80 transition-all duration-300">
-            Adquira o Seu Agora
-          </button>
+          {/* Aqui foi alterado para Link com redirecionamento para a página de planos */}
+          <Link to="/planos">
+            <button className="bg-primary text-white text-xl font-bold py-3 px-10 rounded-full hover:bg-primary/80 transition-all duration-300">
+              Adquira o Seu Agora
+            </button>
+          </Link>
         </motion.div>
       </div>
     </section>
