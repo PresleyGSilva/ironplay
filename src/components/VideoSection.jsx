@@ -25,8 +25,11 @@ const VideoSection = () => {
   };
 
   const nextTrailer = () => {
-    setCurrentIndex((prev) => (prev + 1) % trailers.length);
-    setFadeKey((prev) => prev + 1); // força fade
+    setCurrentIndex((prev) => {
+      const nextIndex = prev + 1;
+      return nextIndex < trailers.length ? nextIndex : prev; // não repetir
+    });
+    setFadeKey((prev) => prev + 1);
   };
 
   useEffect(() => {
@@ -49,7 +52,7 @@ const VideoSection = () => {
             (v) => v.type === 'Trailer' && v.site === 'YouTube'
           );
           if (trailer) {
-            trailerData.push({ key: trailer.key, title: movie.title });
+            trailerData.push({ key: trailer.key });
           }
         }
 
@@ -101,8 +104,6 @@ const VideoSection = () => {
     };
   }, [trailers, currentIndex, isMuted]);
 
-  const currentTitle = trailers[currentIndex]?.title || '';
-
   return (
     <section className="py-20 md:py-28 text-center relative">
       <div className="container">
@@ -130,7 +131,6 @@ const VideoSection = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Botão de volume */}
           <button
             onClick={() => setIsMuted((prev) => !prev)}
             className="absolute bottom-4 right-4 z-10 bg-black/60 hover:bg-black/80 text-white px-3 py-2 rounded-full shadow-lg text-sm md:text-base"
@@ -138,28 +138,6 @@ const VideoSection = () => {
             {isMuted ? '🔇 Ativar som' : '🔊 Desativar som'}
           </button>
         </div>
-
-        {/* Nome do filme atual */}
-        {currentTitle && (
-          <p className="mt-6 text-lg md:text-xl text-white font-semibold">
-            🎬 {currentTitle}
-          </p>
-        )}
-
-        {/* Botão de próximo */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="mt-4"
-        >
-          <button
-            onClick={nextTrailer}
-            className="bg-primary hover:bg-primary/80 text-white font-bold px-6 py-2 rounded-full transition-all duration-300 shadow-md"
-          >
-            Próximo trailer →
-          </button>
-        </motion.div>
       </div>
     </section>
   );
