@@ -1,61 +1,162 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import React, { useState } from "react";
 
 const faqs = [
   {
-    question: "Quais dispositivos são compatíveis?",
-    answer: "Nosso serviço é compatível com Smart TVs (Samsung, LG, etc.), dispositivos Android, iOS, TV Box, Amazon Fire Stick, computadores e muito mais. Basicamente, qualquer dispositivo que possa instalar nosso aplicativo ou usar um player de IPTV."
+    title: "O que é a plataforma KingPlay?",
+    content: (
+      <>
+        <p>
+          O KingPlay é sua plataforma de streaming definitiva, trazendo o melhor do entretenimento diretamente para você.
+          Com uma vasta biblioteca de filmes, séries, esportes ao vivo e canais de TV, temos algo para todos os gostos. Aproveite:
+        </p>
+        <ul className="list-disc list-inside mt-2 space-y-1">
+          <li><strong>Acesso ilimitado</strong>: Assista o quanto quiser, quando quiser.</li>
+          <li><strong>Sem comerciais</strong>: Desfrute de uma experiência contínua, sem interrupções.</li>
+          <li><strong>Atualizações constantes</strong>: Sempre há algo novo para descobrir.</li>
+          <li><strong>Exclusividades imperdíveis</strong>: Conteúdo que você só encontra aqui.</li>
+        </ul>
+        <p className="mt-2">Experimente agora e transforme sua forma de assistir TV!</p>
+      </>
+    ),
   },
   {
-    question: "Como funciona o suporte?",
-    answer: "Oferecemos suporte premium 24/7 via WhatsApp e Telegram. Nossa equipe está sempre pronta para ajudar com qualquer dúvida, problema de instalação ou instabilidade que você possa enfrentar."
+    title: "O pagamento é mensal?",
+    content: (
+      <p>
+        Para aproveitar <strong>todos os benefícios e conteúdos exclusivos</strong> do KingPlay, é necessário assinar um plano.
+        Oferecemos uma variedade de planos acessíveis para se adaptar às suas necessidades, incluindo opções mensais, trimestrais e anuais.
+        <strong> Assine agora e descubra um mundo de entretenimento sem interrupções!</strong>
+      </p>
+    ),
   },
   {
-    question: "O que acontece se o app cair?",
-    answer: "Nossos servidores possuem uma estabilidade de 99.9%, o que significa que quedas são extremamente raras. Caso ocorra alguma instabilidade, nossa equipe de suporte age imediatamente para resolver o problema no menor tempo possível."
+    title: "Como é a instalação?",
+    content: (
+      <p>
+        Nosso sistema é muito simples de instalar, ensinamos passo a passo detalhado pra você conseguir acompanhar e colocar tudo para funcionar.
+      </p>
+    ),
   },
   {
-    question: "Posso cancelar quando quiser?",
-    answer: "Sim! Nossos planos não possuem fidelidade. Você pode cancelar sua assinatura a qualquer momento, sem taxas ou multas. Você continuará com acesso até o final do período já pago."
-  }
+    title: "Após a contratação, tenho acesso imediato?",
+    content: (
+      <p>
+        Imediatamente! Após o pagamento ser confirmado, nossa plataforma enviará no seu e-mail o acesso para a plataforma, e todos os tutoriais de como usar em qualquer aparelho.
+      </p>
+    ),
+  },
+  {
+    title: "Quais dispositivos são compatíveis com o KingPlay?",
+    content: (
+      <>
+        <p>Dispositivos Compatíveis com KingPlay:</p>
+        <ul className="list-disc list-inside mt-2 space-y-1">
+          <li>Smart TV.</li>
+          <li>TV BOX.</li>
+          <li>Smartphone Android, IOS.</li>
+          <li>Computador, Notebook.</li>
+          <li>Chromecast.</li>
+          <li>Fire TV Stick.</li>
+          <li>Tablet.</li>
+          <li>Mi Tv Stick.</li>
+          <li>Apple TV.</li>
+          <li>Toda linha com sistema Android e IOS são compatíveis.</li>
+        </ul>
+        <p className="mt-2">E Muito Mais…</p>
+      </>
+    ),
+  },
+  {
+    title: "O que precisa para utilizar o serviço de IPTV?",
+    content: (
+      <>
+        <p>
+          Para usufruir da lista IPTV, é essencial ter uma conexão de internet de alta velocidade e dispositivos compatíveis, como smart TVs,
+          computadores, tablets ou set-top boxes específicos para o IPTV Brasil.
+        </p>
+        <p className="mt-2">
+          Uma boa infraestrutura de internet é crucial para uma experiência de qualidade sem interrupções na transmissão.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Tenho alguma garantia?",
+    content: (
+      <>
+        <p>Sim, você pode experimentar a KingPlay e todos os conteúdos dela <strong>durante 7 dias.</strong></p>
+        <p className="mt-1">
+          Se dentro desse período você decidir não continuar com a <strong>KingPlay</strong>, por qualquer motivo que seja,
+          é só entrar em contato e nós devolveremos todo o seu dinheiro – sem fazer nenhuma pergunta.
+        </p>
+      </>
+    ),
+  },
+  {
+    title: "Quais são as opções de canais?",
+    content: (
+      <p>
+        Com a KingPlay, você tem acesso a uma ampla gama de canais de TV nacionais e internacionais,
+        contendo milhares de opções para que você nunca mais fique sem ter o que assistir.
+      </p>
+    ),
+  },
 ];
 
-const Faq = () => {
+const AccordionItem = ({ title, children, isOpen, onToggle }) => {
   return (
-    <section className="py-20 md:py-28 bg-black/30">
-      <div className="container max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-5xl font-black tracking-tighter"
-          >
-            Perguntas Frequentes
-          </motion.h2>
-        </div>
-        <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+    <div className="border-b border-gray-700">
+      <button
+        onClick={onToggle}
+        className="w-full flex justify-between items-center py-4 text-left font-semibold text-white hover:text-green-400 transition-colors"
+        aria-expanded={isOpen}
+      >
+        <span>{title}</span>
+        <svg
+          className={`w-5 h-5 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
         >
-            <Accordion type="single" collapsible className="w-full bg-card rounded-lg p-4 border border-white/10">
-              {faqs.map((faq, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger className="text-lg font-semibold text-left">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-secondary">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-        </motion.div>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div
+        className={`overflow-hidden transition-max-height duration-300 ease-in-out text-gray-300`}
+        style={{ maxHeight: isOpen ? "1000px" : "0px" }}
+      >
+        <div className="py-2">{children}</div>
+      </div>
+    </div>
+  );
+};
+
+const FAQ = () => {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleIndex = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
+  return (
+    <section className="max-w-4xl mx-auto p-6 bg-black/80 rounded-lg my-12 text-white shadow-lg">
+      <h2 className="text-4xl font-extrabold mb-8 text-center">Perguntas Frequentes</h2>
+
+      <div>
+        {faqs.map((faq, index) => (
+          <AccordionItem
+            key={index}
+            title={faq.title}
+            isOpen={openIndex === index}
+            onToggle={() => toggleIndex(index)}
+          >
+            {faq.content}
+          </AccordionItem>
+        ))}
       </div>
     </section>
   );
 };
 
-export default Faq;
+export default FAQ;

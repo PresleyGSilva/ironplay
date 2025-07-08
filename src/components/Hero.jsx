@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { Play } from 'lucide-react';
 
 const Hero = () => {
   const [backgroundImage, setBackgroundImage] = useState('');
 
-  // Buscar imagem de fundo dinâmica
   const fetchMovieImage = async () => {
     const API_KEY = 'c102aa0db01dee2c30776db9ae79249e';
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`;
@@ -28,7 +28,7 @@ const Hero = () => {
 
   useEffect(() => {
     fetchMovieImage();
-    const interval = setInterval(fetchMovieImage, 10000);
+    const interval = setInterval(fetchMovieImage, 20000); // 20 segundos
     return () => clearInterval(interval);
   }, []);
 
@@ -37,54 +37,52 @@ const Hero = () => {
       {/* Fundo da seção */}
       <div className="absolute inset-0 w-full h-full">
         <img
-          className="w-full h-full object-cover"
-          alt="Cena de filme"
+          className="w-full h-full object-cover brightness-[0.6] blur-[1px]"
+          alt="Plano de fundo com cena de filme"
           src={backgroundImage}
         />
-        <div className="absolute inset-0 bg-black/70 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060e07] via-[#060e07]/60 to-transparent z-10" />
+        <div className="absolute inset-0 bg-black/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060e07] via-[#060e07]/50 to-transparent z-10" />
       </div>
 
-{/* LOGO no canto superior esquerdo responsivo e maior com gap menor */}
-<div className="absolute top-6 left-6 z-30 flex items-center gap-2 sm:gap-4">
+      {/* Logo */}
+  <div className="absolute top-6 left-6 z-30 flex items-center gap-0.5 sm:gap-1">
   <img
-    src="/assets/kingplay-logo.jpg" // ajuste para seu caminho correto
-    alt="Logo KingPlay"
-    className="h-16 sm:h-24 md:h-28 w-auto transition-all duration-300"
+    src="/assets/kingplay-logo.jpg"
+    alt="Logo da plataforma KingPlay - streaming de filmes e séries"
+    className="h-24 sm:h-32 md:h-36 w-auto transition-all duration-300"
   />
   <h2 className="text-white font-extrabold text-xl sm:text-3xl md:text-4xl leading-none select-none">
-    King<span className="text-green-500">Play</span>
+    King<span className="text-[hsl(var(--primary))]">Play</span>
   </h2>
 </div>
 
 
-
-
-      {/* Conteúdo do Hero */}
+      {/* Conteúdo */}
       <div className="container z-20 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
+          className="flex flex-col items-center"
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-white">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white text-center">
             A experiência definitiva de entretenimento:
-            <span className="text-green-500"> exclusiva, estável e incomparável!</span>
+            <span className="text-[hsl(var(--primary))]"> exclusiva, estável e incomparável!</span>
           </h1>
           <p className="mt-6 max-w-xl sm:max-w-2xl mx-auto text-lg text-gray-300">
-            Filmes, séries, esportes e mais com qualidade superior e suporte dedicado.
+            Filmes, séries, esportes e muito mais com qualidade superior e suporte dedicado.
           </p>
-        </motion.div>
+          <p className="mt-4 text-sm text-[hsl(var(--highlight))] animate-pulse">
+            Oferta promocional por tempo limitado!
+          </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-10"
-        >
-          <a href="#planos">
-            <Button size="lg" className="bg-green-500 text-white text-lg font-bold px-8 sm:px-10 py-6 rounded-full hover:bg-green-600 transition">
-              ADQUIRA O SEU AGORA
+          <a href="#planos" className="mt-8">
+            <Button
+              size="lg"
+              className="bg-[hsl(var(--primary))] hover:bg-[hsl(145,100%,42%)] text-black text-lg font-bold px-8 sm:px-10 py-6 rounded-full hover:scale-105 transition-all flex items-center gap-2"
+            >
+              <Play size={20} /> ADQUIRA O SEU AGORA
             </Button>
           </a>
         </motion.div>

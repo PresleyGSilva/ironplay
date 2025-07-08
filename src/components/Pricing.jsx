@@ -100,16 +100,16 @@ const PricingCard = ({ plan, index }) => {
 
         <CardContent className="flex flex-col items-center text-center mb-3 px-2">
           <div className="flex items-baseline gap-1">
-            <span className="text-2xl md:text-3xl font-extrabold text-green-400 whitespace-nowrap leading-none">
+            <span className="text-2xl md:text-3xl font-extrabold text-[hsl(var(--primary))] whitespace-nowrap leading-none">
               {plan.price}
             </span>
             <span className="text-gray-400 text-xs md:text-sm leading-none">{plan.period}</span>
           </div>
 
-          <ul className="text-xs md:text-sm text-green-100 space-y-1 mt-3 w-full text-left leading-tight">
+          <ul className="text-xs md:text-sm text-gray-200 space-y-1 mt-3 w-full text-left leading-tight">
             {plan.features.map((feature, idx) => (
               <li key={idx} className="flex items-center gap-1">
-                <CheckCircle2 className="text-green-400 w-4 h-4 flex-shrink-0" />
+                <CheckCircle2 className="text-[hsl(var(--primary))] w-4 h-4 flex-shrink-0" />
                 {feature}
               </li>
             ))}
@@ -119,7 +119,7 @@ const PricingCard = ({ plan, index }) => {
         <CardFooter className="pt-0 mt-auto px-2">
           <Button
             onClick={() => window.open(plan.link, '_blank')}
-            className="w-full py-2 bg-green-400 hover:bg-green-500 text-black font-bold rounded-xl transition-all text-sm"
+            className="w-full py-2 bg-[hsl(var(--primary))] hover:bg-[hsl(145,90%,40%)] text-black font-bold rounded-xl transition-all text-sm"
           >
             ACESSO IMEDIATO
           </Button>
@@ -131,7 +131,7 @@ const PricingCard = ({ plan, index }) => {
 
 const Pricing = () => {
   return (
-    <section id="planos" className="py-20 px-6 bg-[#060e07] text-white">
+    <section id="planos" className="py-20 px-6 bg-[#0b0b0b] text-white">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

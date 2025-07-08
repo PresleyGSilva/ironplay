@@ -4,16 +4,25 @@
 
 @layer base {
   :root {
-    --background: 145 55% 12%; /* #103d27 */
+    /* Fundo escuro premium */
+    --background: 155 40% 7%; /* #061c15 */
     --foreground: 0 0% 100%; /* #ffffff */
 
-    --card: 145 55% 15%;
+    /* Cartão mais elevado e legível */
+    --card: 155 40% 12%;
     --card-foreground: 0 0% 100%;
-    --primary: 145 90% 50%; /* #00ff84 */
-    --highlight: 45 100% 51.6%; /* #ffc107 */
 
-    --border: 145 55% 25%;
-    --radius: 0.5rem;
+    /* Verde neon para CTA (botões principais) */
+    --primary: 145 100% 52%; /* #00ff84 */
+    
+    /* Dourado vibrante para destaques ou ícones */
+    --highlight: 45 100% 50%; /* #ffc107 */
+
+    /* Borda sutil com elegância */
+    --border: 155 30% 18%;
+
+    /* Arredondamento agradável */
+    --radius: 0.75rem;
   }
 }
 
@@ -21,6 +30,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: 'Poppins', sans-serif;
