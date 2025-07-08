@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import MovieGallery from '@/components/MovieGallery';
+import MovieGallery from '@/components/MovieGallery'; // Componente para exibir os filmes
 
 const MoviesPage = () => {
+  const [movies, setMovies] = useState([]);
+  const API_KEY = 'c102aa0db01dee2c30776db9ae79249e'; // Sua chave da API do TMDb
+
+  // Função para buscar filmes populares da API
+  const fetchMovies = async () => {
+    try {
+      const res = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`);
+      const data = await res.json();
+      setMovies(data.results || []);  // Armazenar os filmes populares na state
+    } catch (error) {
+      console.error('Erro ao buscar filmes:', error);
+    }
+  };
+
+  // Chama a função para buscar filmes sempre que a página for carregada
+  useEffect(() => {
+    fetchMovies();
+  }, []);  // O array vazio garante que a busca aconteça apenas uma vez ao carregar
+
   return (
     <>
       <Helmet>
@@ -19,7 +38,9 @@ const MoviesPage = () => {
         >
           Catálogo de Filmes
         </motion.h1>
-        <MovieGallery />
+        
+        {/* Exibir os filmes na tela */}
+        <MovieGallery movies={movies} />
       </div>
     </>
   );

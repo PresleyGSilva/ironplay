@@ -1,52 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-
-const canaisEsportivos = [
-  {
-    nome: 'ESPN',
-    descricao: 'Esportes americanos, futebol, NBA, NFL e mais.',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_wordmark.svg',
-  },
-  {
-    nome: 'SporTV',
-    descricao: 'Transmissões ao vivo do Brasileirão, Copa do Brasil e mais.',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/SporTV_logo_2021.svg',
-  },
-  {
-    nome: 'Premiere FC',
-    descricao: 'Pay-per-view com todos os jogos do Brasileirão e estaduais.',
-    logo: 'https://logodownload.org/wp-content/uploads/2017/11/premiere-logo-1.png',
-  },
-  {
-    nome: 'Combate',
-    descricao: 'Canal oficial do UFC ao vivo e outros eventos de lutas.',
-    logo: 'https://logodownload.org/wp-content/uploads/2020/10/combate-logo.png',
-  },
-  {
-    nome: 'BandSports',
-    descricao: 'Fórmula 1, futebol internacional e esportes olímpicos.',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/BandSports_logo_2011.png',
-  },
-  {
-    nome: 'Fox Sports',
-    descricao: 'Campeonatos internacionais e programas esportivos exclusivos.',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/6/67/Fox_Sports_logo.svg',
-  },
-  {
-    nome: 'TNT Sports',
-    descricao: 'Champions League, Paulistão e torneios internacionais.',
-    logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e9/TNT_Sports_logo_2021.svg',
-  },
-];
 
 const SportsPage = () => {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const API_KEY = '0916e5ec3d584b7280640c7e32e57dc9'; // Sua chave da NewsAPI
+
+  // Função para buscar notícias de esportes
+  const fetchSportsNews = async () => {
+    const url = `https://newsapi.org/v2/top-headlines?category=sports&apiKey=${API_KEY}&language=pt`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setArticles(data.articles || []);  // Atualiza o estado com as notícias
+      setLoading(false);
+    } catch (error) {
+      console.error('Erro ao buscar notícias de esportes:', error);
+      setLoading(false);
+    }
+  };
+
+  // Chama a função para buscar notícias quando a página carregar
+  useEffect(() => {
+    fetchSportsNews();
+  }, []);
+
   return (
     <>
       <Helmet>
         <title>Canais Esportivos - IronPlay</title>
-        <meta name="description" content="Confira todos os canais esportivos disponíveis no IPTV IronPlay." />
+        <meta name="description" content="Confira todos os canais esportivos disponíveis no IPTV IronPlay. Assista aos maiores eventos ao vivo em qualidade superior." />
       </Helmet>
 
       <div className="container py-12 md:py-20 text-white">
@@ -56,7 +41,7 @@ const SportsPage = () => {
           transition={{ duration: 0.5 }}
           className="text-4xl md:text-6xl font-black tracking-tighter text-center mb-6"
         >
-          📺 Canais Esportivos ao Vivo
+          📺 **Notícias Esportivas Ao Vivo** para Você
         </motion.h1>
 
         <motion.p
@@ -65,39 +50,51 @@ const SportsPage = () => {
           transition={{ delay: 0.2 }}
           className="text-lg text-secondary text-center max-w-2xl mx-auto mb-12"
         >
-          Aproveite os melhores canais esportivos com transmissão ao vivo dos maiores eventos do mundo. Tudo isso em um só lugar com qualidade e estabilidade!
+          **Fique por dentro dos maiores eventos esportivos**, com qualidade superior e sem interrupções. Escolha o seu evento favorito e tenha acesso ilimitado!
         </motion.p>
 
+        {/* Carregar notícias de esportes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {canaisEsportivos.map((canal, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-black/40 p-6 rounded-xl border border-white/10 shadow-lg flex flex-col items-center text-center"
-            >
-              <img src={canal.logo} alt={canal.nome} className="h-14 mb-4 object-contain" />
-              <h3 className="text-xl font-bold mb-2">{canal.nome}</h3>
-              <p className="text-sm text-secondary">{canal.descricao}</p>
-            </motion.div>
-          ))}
+          {loading ? (
+            <p>Carregando notícias...</p>
+          ) : (
+            articles.length > 0 ? (
+              articles.map((article, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="bg-black/40 p-6 rounded-xl border border-white/10 shadow-lg flex flex-col items-center text-center"
+                >
+                  <img src={article.urlToImage} alt={article.title} className="h-40 mb-4 object-cover rounded" />
+                  <h3 className="text-xl font-bold mb-2">{article.title}</h3>
+                  <p className="text-sm text-secondary">{article.description}</p>
+                  <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline mt-4 inline-block">
+                    Leia mais
+                  </a>
+                </motion.div>
+              ))
+            ) : (
+              <p className="text-lg text-secondary">Nenhuma notícia de esporte disponível no momento.</p>
+            )
+          )}
         </div>
 
-        {/* Botão para Planos */}
+        {/* Botão para planos */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.6 }}
           className="text-center mt-16"
         >
           <Link
             to="/planos"
-            className="inline-block bg-primary hover:bg-primary/80 text-white font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-md"
+            className="inline-block bg-green-500 hover:bg-green-600 text-white font-bold px-6 py-3 rounded-full transition-all duration-300 shadow-md text-lg"
           >
-            📲 Quero Assinar Agora
+            📲 **Adquira Agora e Assista a Tudo Ao Vivo!**
           </Link>
         </motion.div>
       </div>

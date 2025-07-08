@@ -5,11 +5,11 @@ import { Button } from '@/components/ui/button';
 const Hero = () => {
   const [backgroundImage, setBackgroundImage] = useState('');
 
-  // Função para buscar filmes populares na API do TMDb
+  // Buscar imagem de fundo dinâmica
   const fetchMovieImage = async () => {
-    const API_KEY = 'c102aa0db01dee2c30776db9ae79249e'; // Substitua com sua chave da API
+    const API_KEY = 'c102aa0db01dee2c30776db9ae79249e';
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`;
-    
+
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -18,28 +18,24 @@ const Hero = () => {
       if (randomMovie && randomMovie.backdrop_path) {
         setBackgroundImage(`https://image.tmdb.org/t/p/original${randomMovie.backdrop_path}`);
       } else {
-        setBackgroundImage('https://via.placeholder.com/1920x1080'); // Fallback se não houver imagem
+        setBackgroundImage('https://via.placeholder.com/1920x1080');
       }
     } catch (error) {
       console.error('Erro ao buscar filmes:', error);
-      setBackgroundImage('https://via.placeholder.com/1920x1080'); // Fallback em caso de erro
+      setBackgroundImage('https://via.placeholder.com/1920x1080');
     }
   };
 
-  // Chama a função para buscar imagens de filmes ao carregar o componente
   useEffect(() => {
     fetchMovieImage();
-    
-    // Define um intervalo de tempo para trocar a imagem (por exemplo, a cada 10 segundos)
     const interval = setInterval(fetchMovieImage, 10000);
-    
-    return () => clearInterval(interval); // Limpar o intervalo quando o componente for desmontado
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <section className="w-full h-[90vh] sm:h-[80vh] lg:h-[75vh] text-center relative flex items-center justify-center overflow-hidden">
+      {/* Fundo da seção */}
       <div className="absolute inset-0 w-full h-full">
-        {/* Imagem de fundo dinâmica */}
         <img
           className="w-full h-full object-cover"
           alt="Cena de filme"
@@ -49,6 +45,22 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#060e07] via-[#060e07]/60 to-transparent z-10" />
       </div>
 
+{/* LOGO no canto superior esquerdo responsivo e maior com gap menor */}
+<div className="absolute top-6 left-6 z-30 flex items-center gap-2 sm:gap-4">
+  <img
+    src="/assets/kingplay-logo.jpg" // ajuste para seu caminho correto
+    alt="Logo KingPlay"
+    className="h-16 sm:h-24 md:h-28 w-auto transition-all duration-300"
+  />
+  <h2 className="text-white font-extrabold text-xl sm:text-3xl md:text-4xl leading-none select-none">
+    King<span className="text-green-500">Play</span>
+  </h2>
+</div>
+
+
+
+
+      {/* Conteúdo do Hero */}
       <div className="container z-20 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
