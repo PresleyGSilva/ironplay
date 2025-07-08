@@ -46,13 +46,13 @@ const Hero = () => {
       </div>
 
       {/* Logo */}
-  <div className="absolute top-6 left-6 z-30 flex items-center gap-0.5 sm:gap-1">
+  <div className="absolute top-6 left-6 z-30 flex items-center gap-2 sm:gap-3">
   <img
     src="/assets/kingplay-logo.jpg"
     alt="Logo da plataforma KingPlay - streaming de filmes e séries"
-    className="h-24 sm:h-32 md:h-36 w-auto transition-all duration-300"
+    className="h-32 sm:h-40 md:h-48 w-auto transition-all duration-300"
   />
-  <h2 className="text-white font-extrabold text-xl sm:text-3xl md:text-4xl leading-none select-none">
+  <h2 className="text-white font-extrabold text-2xl sm:text-4xl md:text-5xl leading-none select-none">
     King<span className="text-[hsl(var(--primary))]">Play</span>
   </h2>
 </div>
