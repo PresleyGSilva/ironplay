@@ -39,7 +39,7 @@ const Benefits = () => {
           transition={{ duration: 0.6 }}
           className="text-3xl md:text-5xl font-black tracking-tighter text-white mb-12"
         >
-          A IronPlay é diferente de tudo o que você já viu
+          A FireFlick é diferente de tudo o que você já viu
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">

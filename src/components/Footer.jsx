@@ -13,7 +13,7 @@ const Footer = () => {
             className="h-24 sm:h-28 md:h-32 w-auto transition-all duration-300"
           />
           <h2 className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight select-none">
-            King<span className="text-[hsl(var(--primary))]">Play</span>
+            Fire<span className="text-[hsl(var(--primary))]">Flick</span>
           </h2>
         </div>
 

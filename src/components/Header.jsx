@@ -43,7 +43,7 @@ const Header = () => {
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-2">
           <Clapperboard className="h-8 w-8 text-primary" />
-          <span className="text-2xl font-black tracking-tighter text-white">KingPlay</span>
+          <span className="text-2xl font-black tracking-tighter text-white">FireFlick</span>
         </NavLink>
 
         {/* Desktop nav */}

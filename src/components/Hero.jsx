@@ -28,7 +28,7 @@ const Hero = () => {
 
   useEffect(() => {
     fetchMovieImage();
-    const interval = setInterval(fetchMovieImage, 20000); // 20 segundos
+    const interval = setInterval(fetchMovieImage, 20000); // Atualiza a imagem a cada 20s
     return () => clearInterval(interval);
   }, []);
 
@@ -46,17 +46,16 @@ const Hero = () => {
       </div>
 
       {/* Logo */}
-  <div className="absolute top-6 left-6 z-30 flex items-center gap-2 sm:gap-3">
-  <img
-    src="/assets/kingplay-logo.jpg"
-    alt="Logo da plataforma KingPlay - streaming de filmes e séries"
-    className="h-32 sm:h-40 md:h-48 w-auto transition-all duration-300"
-  />
-  <h2 className="text-white font-extrabold text-2xl sm:text-4xl md:text-5xl leading-none select-none">
-    King<span className="text-[hsl(var(--primary))]">Play</span>
-  </h2>
-</div>
-
+      <div className="absolute top-6 left-6 z-30 flex items-center gap-2 sm:gap-3">
+        <img
+          src="/assets/kingplay-logo.jpg"
+          alt="Logo da plataforma KingPlay - streaming de filmes e séries"
+          className="h-32 sm:h-40 md:h-48 w-auto transition-all duration-300"
+        />
+        <h2 className="text-white font-extrabold text-2xl sm:text-4xl md:text-5xl leading-none select-none">
+          Fire<span className="text-[hsl(var(--primary))]">FLick</span>
+        </h2>
+      </div>
 
       {/* Conteúdo */}
       <div className="container z-20 px-4">
@@ -67,7 +66,8 @@ const Hero = () => {
           className="flex flex-col items-center"
         >
           <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white text-center">
-            A experiência definitiva de entretenimento:
+  A experiência definitiva de entretenimento:
+  
             <span className="text-[hsl(var(--primary))]"> exclusiva, estável e incomparável!</span>
           </h1>
           <p className="mt-6 max-w-xl sm:max-w-2xl mx-auto text-lg text-gray-300">
@@ -77,13 +77,36 @@ const Hero = () => {
             Oferta promocional por tempo limitado!
           </p>
 
-          <a href="#planos" className="mt-8">
+          {/* Botão com reflexo animado */}
+          <a href="#planos" className="mt-8 relative inline-block">
             <Button
               size="lg"
-              className="bg-[hsl(var(--primary))] hover:bg-[hsl(145,100%,42%)] text-black text-lg font-bold px-8 sm:px-10 py-6 rounded-full hover:scale-105 transition-all flex items-center gap-2"
+              className="relative overflow-hidden bg-[hsl(var(--primary))] hover:bg-[hsl(145,100%,42%)] text-black text-lg font-bold px-8 sm:px-10 py-6 rounded-full hover:scale-105 transition-all flex items-center gap-2"
             >
               <Play size={20} /> ADQUIRA O SEU AGORA
+
+              {/* Faixa de reflexo animada */}
+              <span
+                aria-hidden="true"
+                className="absolute top-0 left-[-75%] w-20 h-full bg-white/30
+                  transform skew-x-[-20deg]
+                  animate-[shine_2.5s_linear_infinite]"
+              />
             </Button>
+
+            {/* Estilo da animação */}
+            <style>
+              {`
+                @keyframes shine {
+                  0% {
+                    left: -75%;
+                  }
+                  100% {
+                    left: 125%;
+                  }
+                }
+              `}
+            </style>
           </a>
         </motion.div>
       </div>

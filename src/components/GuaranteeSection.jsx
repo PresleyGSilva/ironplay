@@ -25,10 +25,10 @@ const GuaranteeSection = () => {
           </h2>
 
           <p className="mb-3 text-gray-300 leading-relaxed">
-            Sem letras miúdas no contrato: você pode experimentar a <strong>KingPlay</strong> e todos os conteúdos dela <strong>durante 7 dias.</strong>
+            Sem letras miúdas no contrato: você pode experimentar a <strong>FLireFlick</strong> e todos os conteúdos dela <strong>durante 7 dias.</strong>
           </p>
           <p className="mb-3 text-gray-300 leading-relaxed">
-            Se dentro desse período você decidir não continuar com a <strong>KingPlay</strong>, por qualquer motivo que seja, é só entrar em contato e nós devolveremos todo o seu dinheiro – sem fazer nenhuma pergunta.
+            Se dentro desse período você decidir não continuar com a <strong>FLireFlick</strong>, por qualquer motivo que seja, é só entrar em contato e nós devolveremos todo o seu dinheiro – sem fazer nenhuma pergunta.
           </p>
           <p className="mb-6 text-gray-300 leading-relaxed">
             A partir de agora, você não tem nada a perder.

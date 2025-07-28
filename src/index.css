@@ -4,16 +4,22 @@
 
 @layer base {
   :root {
-    --background: 155 40% 6%; /* Fundo escuro profundo (#051913) */
-    --foreground: 0 0% 100%; /* Branco */
+    /* Fundo verde escuro similar ao azul escuro original */
+    --background: 140 70% 10%;
+    --foreground: 0 0% 100%;
 
-    --card: 155 40% 10%;
+    /* Cartões */
+    --card: 140 70% 15%;
     --card-foreground: 0 0% 100%;
 
-    --primary: 145 100% 52%; /* Verde neon (#00ff84) */
-    --highlight: 45 100% 58%; /* Dourado vibrante (#ffca2c) */
+    /* Verde para primários e degradê */
+    --primary: 135 75% 45%;
+    --primary-light: 145 85% 55%;
+    
+    /* Dourado vibrante */
+    --highlight: 45 100% 58%;
 
-    --border: 155 30% 16%;
+    --border: 140 60% 12%;
     --radius: 0.75rem;
   }
 
@@ -22,12 +28,12 @@
   }
 
   body {
-    @apply text-foreground;
+    @apply text-white;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(
       180deg,
-      hsl(155 40% 6%) 0%,
-      hsl(155 30% 8%) 100%
+      hsl(var(--background)) 0%,
+      hsl(140, 100%, 12%) 100%
     );
   }
 }
@@ -69,6 +75,27 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-black font-bold py-2 px-6 rounded-lg shadow-lg hover:opacity-90 transition-all duration-300;
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary-light)) 100%
+    );
+    color: black;
+    font-weight: 700;
+    padding: 0.5rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 15px -3px hsla(var(--primary), 0.5),
+                0 4px 6px -4px hsla(var(--primary-light), 0.4);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+
+  .text-green-gradient {
+    background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }

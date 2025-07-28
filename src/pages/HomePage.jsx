@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>KingPlay - O Melhor do Entretenimento em um Só Lugar</title>
+        <title>FireFlick - O Melhor do Entretenimento em um Só Lugar</title>
         <meta
           name="description"
           content="Filmes, séries, esportes e canais ao vivo com qualidade 4K e estabilidade incomparável."
