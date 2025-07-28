@@ -78,9 +78,7 @@ const PricingCard = ({ plan, index }) => {
       className="h-full"
     >
       <Card
-        className={`flex flex-col h-full border-2 rounded-2xl p-4 bg-[#0b0b0b] shadow-lg ${
-          plan.isPopular ? 'border-yellow-400' : 'border-green-500'
-        }`}
+        className={`flex flex-col h-full border-2 rounded-2xl p-4 bg-[#0b0b0b] shadow-lg border-[#ff6b00]`}
       >
         {plan.badge && (
           <div className="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mb-2 w-fit mx-auto">
@@ -116,12 +114,18 @@ const PricingCard = ({ plan, index }) => {
           </ul>
         </CardContent>
 
-        <CardFooter className="pt-0 mt-auto px-2">
+        <CardFooter className="pt-0 mt-auto px-2 relative">
           <Button
             onClick={() => window.open(plan.link, '_blank')}
-            className="w-full py-2 bg-[hsl(var(--primary))] hover:bg-[hsl(145,90%,40%)] text-black font-bold rounded-xl transition-all text-sm"
+            className="w-full py-2 bg-[#ff6b00] hover:bg-orange-500 text-black font-bold rounded-xl transition-all text-sm relative overflow-hidden"
           >
             ACESSO IMEDIATO
+            <span
+              aria-hidden="true"
+              className="absolute top-0 left-[-75%] w-20 h-full bg-white/30
+                transform skew-x-[-20deg]
+                animate-[shine_2.5s_linear_infinite]"
+            />
           </Button>
         </CardFooter>
       </Card>
@@ -149,6 +153,20 @@ const Pricing = () => {
           ))}
         </div>
       </div>
+
+      {/* Reflexo shine keyframe */}
+      <style>
+        {`
+          @keyframes shine {
+            0% {
+              left: -75%;
+            }
+            100% {
+              left: 125%;
+            }
+          }
+        `}
+      </style>
     </section>
   );
 };

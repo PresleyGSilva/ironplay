@@ -12,9 +12,7 @@ const Footer = () => {
             alt="Logo da plataforma KingPlay - streaming de filmes e séries"
             className="h-24 sm:h-28 md:h-32 w-auto transition-all duration-300"
           />
-          <h2 className="text-white font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight select-none">
-            Fire<span className="text-[hsl(var(--primary))]">Flick</span>
-          </h2>
+         
         </div>
 
         {/* FORMAS DE PAGAMENTO */}
@@ -59,7 +57,7 @@ const Footer = () => {
 
         {/* COPYRIGHT */}
         <p className="text-xs text-gray-600">
-          © {new Date().getFullYear()} KingPlay. Todos os direitos reservados.
+          © {new Date().getFullYear()} FireFlick. Todos os direitos reservados.
         </p>
       </div>
     </footer>
