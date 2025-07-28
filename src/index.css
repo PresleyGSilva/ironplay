@@ -4,22 +4,22 @@
 
 @layer base {
   :root {
-    /* Fundo verde escuro similar ao azul escuro original */
-    --background: 140 70% 10%;
+    /* Fundo escuro que destaca o fogo */
+    --background: 10 85% 8%;
     --foreground: 0 0% 100%;
 
     /* Cartões */
-    --card: 140 70% 15%;
+    --card: 10 90% 12%;
     --card-foreground: 0 0% 100%;
 
-    /* Verde para primários e degradê */
-    --primary: 135 75% 45%;
-    --primary-light: 145 85% 55%;
-    
-    /* Dourado vibrante */
-    --highlight: 45 100% 58%;
+    /* Primários: tons da chama */
+    --primary: 25 100% 50%; /* Laranja fogo */
+    --primary-light: 35 100% 65%; /* Laranja claro */
 
-    --border: 140 60% 12%;
+    /* Destaque: dourado intenso */
+    --highlight: 45 100% 58%; /* Amarelo dourado */
+
+    --border: 10 90% 10%;
     --radius: 0.75rem;
   }
 
@@ -33,7 +33,7 @@
     background: linear-gradient(
       180deg,
       hsl(var(--background)) 0%,
-      hsl(140, 100%, 12%) 100%
+      hsl(10, 100%, 12%) 100%
     );
   }
 }
@@ -45,7 +45,7 @@
   width: 150%;
   height: 150%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, hsla(var(--primary) / 0.1) 0%, hsla(var(--primary) / 0) 50%);
+  background: radial-gradient(circle, hsla(var(--primary) / 0.15) 0%, hsla(var(--primary) / 0) 50%);
   pointer-events: none;
   z-index: -1;
   @apply lg:w-1/3 md:w-1/2 w-3/4;
@@ -89,12 +89,16 @@
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
   .btn-primary:hover {
-    opacity: 0.9;
+    opacity: 0.95;
     transform: scale(1.05);
   }
 
-  .text-green-gradient {
-    background: linear-gradient(90deg, hsl(var(--primary)) 0%, hsl(var(--primary-light)) 100%);
+  .text-fire-gradient {
+    background: linear-gradient(90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary-light)) 45%,
+      hsl(var(--highlight)) 90%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
