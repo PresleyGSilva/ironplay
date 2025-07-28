@@ -45,34 +45,42 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-[#060e07] via-[#060e07]/50 to-transparent z-10" />
       </div>
 
-      {/* Logo */}
-      <div className="absolute top-6 left-6 z-30 flex items-center gap-2 sm:gap-3">
-        <img
-          src="/assets/kingplay-logo.jpg"
-          alt="Logo da plataforma KingPlay - streaming de filmes e séries"
-          className="h-32 sm:h-40 md:h-48 w-auto transition-all duration-300"
-        />
-        <h2 className="text-white font-extrabold text-2xl sm:text-4xl md:text-5xl leading-none select-none">
-          Fire<span className="text-[hsl(var(--primary))]">FLick</span>
-        </h2>
-      </div>
+      {/* Logo com texto centralizado verticalmente */}
+   <div className="absolute top-6 left-6 z-30">
+  <div className="relative">
+    <img
+      src="/assets/kingplay-logo.jpg"
+      alt="Logo da plataforma KingPlay - streaming de filmes e séries"
+      className="h-32 sm:h-40 md:h-48 w-auto transition-all duration-300"
+    />
 
-      {/* Conteúdo */}
-      <div className="container z-20 px-4">
+    {/* Nome FireFLick posicionado manualmente */}
+ 
+ 
+
+  </div>
+</div>
+
+
+
+      {/* Conteúdo principal */}
+      <div className="container z-20 px-4 mt-32">
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center"
         >
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white text-center">
-  A experiência definitiva de entretenimento:
-  
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight text-white text-center mb-6">
+            A experiência definitiva de entretenimento:
             <span className="text-[hsl(var(--primary))]"> exclusiva, estável e incomparável!</span>
           </h1>
+
           <p className="mt-6 max-w-xl sm:max-w-2xl mx-auto text-lg text-gray-300">
             Filmes, séries, esportes e muito mais com qualidade superior e suporte dedicado.
           </p>
+
           <p className="mt-4 text-sm text-[hsl(var(--highlight))] animate-pulse">
             Oferta promocional por tempo limitado!
           </p>
