@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+
 import Hero from '@/components/Hero';
 import MovieGallery from '@/components/MovieGallery';
 import VideoSection from '@/components/VideoSection';
@@ -8,7 +9,7 @@ import Testimonials from '@/components/Testimonials';
 import AvailableContent from '@/components/AvailableContent';
 import Pricing from '@/components/Pricing';
 import Faq from '@/components/Faq';
-import GuaranteeSection from '@/components/GuaranteeSection';  // <-- importe aqui
+import GuaranteeSection from '@/components/GuaranteeSection';
 
 const HomePage = () => {
   return (
@@ -25,6 +26,9 @@ const HomePage = () => {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"
           rel="stylesheet"
         />
+
+        {/* Favicon - logo na aba do navegador */}
+        <link rel="icon" href="/public/favicon.ico" type="image/icon" />
       </Helmet>
 
       <Hero />

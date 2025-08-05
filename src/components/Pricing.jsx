@@ -1,72 +1,202 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2 } from 'lucide-react';
 
-const plans = [
-  {
-    name: 'Plano Mensal',
-    price: 'R$ 16,90',
-    period: 'à vista',
-    features: [
-      '1 mês de acesso completo',
-      'Assista em 1 tela simultânea',
-      '+ de 40 mil conteúdos',
-      'Qualidade SD/HD/FHD/4K',
-      'Smart TV, Tablet, PC, TV Box'
-    ],
-    isPopular: false,
-    link: 'https://sualoja.com/checkout-mensal',
-    badge: 'OFERTA POR TEMPO LIMITADO'
-  },
-  {
-    name: 'Plano Trimestral',
-    price: 'R$ 34,90',
-    period: 'ou 2x de R$ 17,45',
-    features: [
-      '3 meses de acesso completo',
-      'Assista em 1 tela simultânea',
-      'Canais Adultos (opcional)',
-      '+ de 40 mil conteúdos',
-      'Qualidade SD/HD/FHD/4K',
-      'Compatível com Smart TV, Tablet, PC, TV Box'
-    ],
-    isPopular: false,
-    link: 'https://sualoja.com/checkout-trimestral'
-  },
-  {
-    name: 'Plano Semestral',
-    price: 'R$ 59,90',
-    period: 'ou 3x de R$ 19,97',
-    features: [
-      '6 meses de acesso completo',
-      'Assista em 1 tela simultânea',
-      'Canais Adultos (opcional)',
-      '+ de 40 mil conteúdos',
-      'Qualidade SD/HD/FHD/4K',
-      'Smart TV, Tablet, PC, TV Box'
-    ],
-    isPopular: false,
-    link: 'https://sualoja.com/checkout-semestral'
-  },
-  {
-    name: 'Plano Anual',
-    price: 'R$ 109,90',
-    period: 'ou 12x de R$ 9,16',
-    features: [
-      '12 meses de acesso completo',
-      'Assista em 2 telas simultâneas',
-      'Canais Adultos (opcional)',
-      '+ de 40 mil conteúdos',
-      'Qualidade SD/HD/FHD/4K',
-      'Smart TV, Tablet, PC, TV Box'
-    ],
-    isPopular: true,
-    link: 'https://sualoja.com/checkout-anual'
-  }
-];
+const plansData = {
+  kirvano: [
+    {
+      name: 'Plano Mensal',
+      price: 'R$ 16,90',
+      period: 'à vista',
+      features: [
+        '1 mês de acesso completo',
+        'Assista em 1 tela simultânea',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box'
+      ],
+      isPopular: false,
+      link: 'https://kirvano.com/checkout-mensal',
+      badge: 'OFERTA POR TEMPO LIMITADO',
+    },
+    {
+      name: 'Plano Trimestral',
+      price: 'R$ 34,90',
+      period: 'ou 2x de R$ 17,45',
+      features: [
+        '3 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Compatível com Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: false,
+      link: 'https://kirvano.com/checkout-trimestral',
+    },
+    {
+      name: 'Plano Semestral',
+      price: 'R$ 59,90',
+      period: 'ou 3x de R$ 19,97',
+      features: [
+        '6 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: false,
+      link: 'https://kirvano.com/checkout-semestral',
+    },
+    {
+      name: 'Plano Anual',
+      price: 'R$ 109,90',
+      period: 'ou 12x de R$ 9,16',
+      features: [
+        '12 meses de acesso completo',
+        'Assista em 2 telas simultâneas',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: true,
+      link: 'https://kirvano.com/checkout-anual',
+    },
+  ],
+  braip: [
+    {
+      name: 'Plano Mensal',
+      price: 'R$ 16,90',
+      period: 'à vista',
+      features: [
+        '1 mês de acesso completo',
+        'Assista em 1 tela simultânea',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box'
+      ],
+      isPopular: false,
+      link: 'https://braip.com/checkout-mensal',
+      badge: 'OFERTA POR TEMPO LIMITADO',
+    },
+    {
+      name: 'Plano Trimestral',
+      price: 'R$ 34,90',
+      period: 'ou 2x de R$ 17,45',
+      features: [
+        '3 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Compatível com Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: false,
+      link: 'https://braip.com/checkout-trimestral',
+    },
+    {
+      name: 'Plano Semestral',
+      price: 'R$ 59,90',
+      period: 'ou 3x de R$ 19,97',
+      features: [
+        '6 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: false,
+      link: 'https://braip.com/checkout-semestral',
+    },
+    {
+      name: 'Plano Anual',
+      price: 'R$ 109,90',
+      period: 'ou 12x de R$ 9,16',
+      features: [
+        '12 meses de acesso completo',
+        'Assista em 2 telas simultâneas',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: true,
+      link: 'https://braip.com/checkout-anual',
+    },
+  ],
+  cakto: [
+    {
+      name: 'Plano Mensal',
+      price: 'R$ 16,90',
+      period: 'à vista',
+      features: [
+        '1 mês de acesso completo',
+        'Assista em 1 tela simultânea',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: false,
+      link: 'https://pay.cakto.com.br/yah7jus',
+      badge: 'OFERTA POR TEMPO LIMITADO',
+    },
+    {
+      name: 'Plano Trimestral',
+      price: 'R$ 34,90',
+      period: 'ou 2x de R$ 17,45',
+      features: [
+        '3 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Compatível com Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: false,
+      link: 'https://pay.cakto.com.br/34ixret',
+    },
+    {
+      name: 'Plano Semestral',
+      price: 'R$ 59,90',
+      period: 'ou 3x de R$ 19,97',
+      features: [
+        '6 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: false,
+      link: 'https://pay.cakto.com.br/z55jwqn',
+    },
+    {
+      name: 'Plano Anual',
+      price: 'R$ 109,90',
+      period: 'ou 12x de R$ 9,16',
+      features: [
+        '12 meses de acesso completo',
+        'Assista em 2 telas simultâneas',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: true,
+      link: 'https://pay.cakto.com.br/7gg8spm',
+    },
+  ],
+};
 
+const getPlansByPlatform = (platform) => {
+  return plansData[platform] || plansData.kirvano;
+};
 
 const PricingCard = ({ plan, index }) => {
   return (
@@ -77,9 +207,7 @@ const PricingCard = ({ plan, index }) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="h-full"
     >
-      <Card
-        className="flex flex-col h-full border-2 rounded-2xl p-4 bg-[#0b0b0b] shadow-lg border-[hsl(var(--primary))]"
-      >
+      <Card className="flex flex-col h-full border-2 rounded-2xl p-4 bg-[#0b0b0b] shadow-lg border-[hsl(var(--primary))]">
         {plan.badge && (
           <div className="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mb-2 w-fit mx-auto">
             {plan.badge}
@@ -134,6 +262,15 @@ const PricingCard = ({ plan, index }) => {
 };
 
 const Pricing = () => {
+  const location = useLocation();
+  const path = location.pathname;
+
+  let plataforma = 'kirvano'; // padrão
+  if (path.includes('/v2')) plataforma = 'braip';
+  else if (path.includes('/v3')) plataforma = 'cakto';
+
+  const plans = getPlansByPlatform(plataforma);
+
   return (
     <section id="planos" className="py-20 px-6 bg-[#0b0b0b] text-white">
       <div className="max-w-7xl mx-auto">

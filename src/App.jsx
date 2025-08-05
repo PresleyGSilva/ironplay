@@ -25,7 +25,15 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
+        {/* Página principal */}
         <Route index element={<HomePage />} />
+
+        {/* Acessos alternativos com a mesma estrutura */}
+        <Route path="v1" element={<HomePage />} />
+        <Route path="v2" element={<HomePage />} />
+        <Route path="v3" element={<HomePage />} />
+
+        {/* Outras páginas */}
         <Route path="filmes" element={<MoviesPage />} />
         <Route path="series" element={<SeriesPage />} />
         <Route path="esportes" element={<SportsPage />} />
