@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 const faqs = [
   {
-    title: "O que é a plataforma FireFlick?",
+    title: "O que é a plataforma IronPlay?",
     content: (
       <>
         <p>
-          O FireFlick é sua plataforma de streaming definitiva, trazendo o melhor do entretenimento diretamente para você.
+          O IronPlay é sua plataforma de streaming definitiva, trazendo o melhor do entretenimento diretamente para você.
           Com uma vasta biblioteca de filmes, séries, esportes ao vivo e canais de TV, temos algo para todos os gostos. Aproveite:
         </p>
         <ul className="list-disc list-inside mt-2 space-y-1">
@@ -23,7 +23,7 @@ const faqs = [
     title: "O pagamento é mensal?",
     content: (
       <p>
-        Para aproveitar <strong>todos os benefícios e conteúdos exclusivos</strong> do FireFlick, é necessário assinar um plano.
+        Para aproveitar <strong>todos os benefícios e conteúdos exclusivos</strong> do IronPlay, é necessário assinar um plano.
         Oferecemos uma variedade de planos acessíveis para se adaptar às suas necessidades, incluindo opções mensais, trimestrais e anuais.
         <strong> Assine agora e descubra um mundo de entretenimento sem interrupções!</strong>
       </p>
@@ -46,10 +46,10 @@ const faqs = [
     ),
   },
   {
-    title: "Quais dispositivos são compatíveis com o FireFlick?",
+    title: "Quais dispositivos são compatíveis com o IronPlay?",
     content: (
       <>
-        <p>Dispositivos Compatíveis com FireFlick:</p>
+        <p>Dispositivos Compatíveis com IronPlay:</p>
         <ul className="list-disc list-inside mt-2 space-y-1">
           <li>Smart TV.</li>
           <li>TV BOX.</li>
@@ -84,9 +84,9 @@ const faqs = [
     title: "Tenho alguma garantia?",
     content: (
       <>
-        <p>Sim, você pode experimentar a FireFlick e todos os conteúdos dela <strong>durante 7 dias.</strong></p>
+        <p>Sim, você pode experimentar a IronPlay e todos os conteúdos dela <strong>durante 7 dias.</strong></p>
         <p className="mt-1">
-          Se dentro desse período você decidir não continuar com a <strong>FireFlick</strong>, por qualquer motivo que seja,
+          Se dentro desse período você decidir não continuar com a <strong>IronPlay</strong>, por qualquer motivo que seja,
           é só entrar em contato e nós devolveremos todo o seu dinheiro – sem fazer nenhuma pergunta.
         </p>
       </>
@@ -96,7 +96,7 @@ const faqs = [
     title: "Quais são as opções de canais?",
     content: (
       <p>
-        Com a FireFlick, você tem acesso a uma ampla gama de canais de TV nacionais e internacionais,
+        Com a IronPlay, você tem acesso a uma ampla gama de canais de TV nacionais e internacionais,
         contendo milhares de opções para que você nunca mais fique sem ter o que assistir.
       </p>
     ),

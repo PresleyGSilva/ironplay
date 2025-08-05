@@ -8,7 +8,7 @@ const Footer = () => {
         {/* LOGO */}
         <div className="flex flex-col sm:flex-row items-center gap-4">
           <img
-            src="/assets/kingplay-logo.jpg"
+            src="/assets/kingplay-logo.png"
             alt="Logo da plataforma KingPlay - streaming de filmes e séries"
             className="h-24 sm:h-28 md:h-32 w-auto transition-all duration-300"
           />
@@ -57,7 +57,7 @@ const Footer = () => {
 
         {/* COPYRIGHT */}
         <p className="text-xs text-gray-600">
-          © {new Date().getFullYear()} FireFlick. Todos os direitos reservados.
+          © {new Date().getFullYear()} IronPlay. Todos os direitos reservados.
         </p>
       </div>
     </footer>

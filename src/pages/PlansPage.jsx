@@ -7,7 +7,7 @@ const PlansPage = () => {
   return (
     <>
       <Helmet>
-        <title>Planos - FireFLick</title>
+        <title>Planos - IronPlay</title>
         <meta name="description" content="Escolha o plano ideal para você e sua família. Qualidade e preço justo." />
       </Helmet>
       <div className="py-12 md:py-20">

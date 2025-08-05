@@ -7,8 +7,8 @@ import { CheckCircle2 } from 'lucide-react';
 const plans = [
   {
     name: 'Plano Mensal',
-    price: 'R$ 19,90',
-    period: '/mês',
+    price: 'R$ 16,90',
+    period: 'à vista',
     features: [
       '1 mês de acesso completo',
       'Assista em 1 tela simultânea',
@@ -22,11 +22,11 @@ const plans = [
   },
   {
     name: 'Plano Trimestral',
-    price: 'R$ 39,90',
-    period: '/3 meses',
+    price: 'R$ 34,90',
+    period: 'ou 2x de R$ 17,45',
     features: [
       '3 meses de acesso completo',
-      'Assista em 2 telas simultâneas',
+      'Assista em 1 tela simultânea',
       'Canais Adultos (opcional)',
       '+ de 40 mil conteúdos',
       'Qualidade SD/HD/FHD/4K',
@@ -37,11 +37,11 @@ const plans = [
   },
   {
     name: 'Plano Semestral',
-    price: 'R$ 69,90',
-    period: '/6 meses',
+    price: 'R$ 59,90',
+    period: 'ou 3x de R$ 19,97',
     features: [
       '6 meses de acesso completo',
-      'Assista em 2 telas simultâneas',
+      'Assista em 1 tela simultânea',
       'Canais Adultos (opcional)',
       '+ de 40 mil conteúdos',
       'Qualidade SD/HD/FHD/4K',
@@ -52,12 +52,11 @@ const plans = [
   },
   {
     name: 'Plano Anual',
-    price: 'R$ 129,90',
-    period: '/ano',
+    price: 'R$ 109,90',
+    period: 'ou 12x de R$ 9,16',
     features: [
       '12 meses de acesso completo',
-      'Assista em 4 telas simultâneas',
-      '12x de R$ 12,99',
+      'Assista em 2 telas simultâneas',
       'Canais Adultos (opcional)',
       '+ de 40 mil conteúdos',
       'Qualidade SD/HD/FHD/4K',
@@ -67,6 +66,7 @@ const plans = [
     link: 'https://sualoja.com/checkout-anual'
   }
 ];
+
 
 const PricingCard = ({ plan, index }) => {
   return (
@@ -78,7 +78,7 @@ const PricingCard = ({ plan, index }) => {
       className="h-full"
     >
       <Card
-        className={`flex flex-col h-full border-2 rounded-2xl p-4 bg-[#0b0b0b] shadow-lg border-[#ff6b00]`}
+        className="flex flex-col h-full border-2 rounded-2xl p-4 bg-[#0b0b0b] shadow-lg border-[hsl(var(--primary))]"
       >
         {plan.badge && (
           <div className="bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mb-2 w-fit mx-auto">
@@ -117,7 +117,7 @@ const PricingCard = ({ plan, index }) => {
         <CardFooter className="pt-0 mt-auto px-2 relative">
           <Button
             onClick={() => window.open(plan.link, '_blank')}
-            className="w-full py-2 bg-[#ff6b00] hover:bg-orange-500 text-black font-bold rounded-xl transition-all text-sm relative overflow-hidden"
+            className="w-full py-2 btn-primary font-bold rounded-xl transition-all text-sm relative overflow-hidden"
           >
             ACESSO IMEDIATO
             <span
@@ -142,7 +142,7 @@ const Pricing = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-5xl font-extrabold text-center mb-16"
+          className="text-3xl md:text-5xl font-extrabold text-center mb-16 text-fire-gradient"
         >
           Escolha seu plano
         </motion.h2>

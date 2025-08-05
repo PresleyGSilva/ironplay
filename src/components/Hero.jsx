@@ -49,12 +49,12 @@ const Hero = () => {
    <div className="absolute top-6 left-6 z-30">
   <div className="relative">
     <img
-      src="/assets/kingplay-logo.jpg"
+      src="/assets/kingplay-logo.png"
       alt="Logo da plataforma KingPlay - streaming de filmes e séries"
       className="h-32 sm:h-40 md:h-48 w-auto transition-all duration-300"
     />
 
-    {/* Nome FireFLick posicionado manualmente */}
+    {/* Nome IronPlay posicionado manualmente */}
  
  
 

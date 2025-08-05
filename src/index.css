@@ -4,22 +4,22 @@
 
 @layer base {
   :root {
-    /* Fundo escuro que destaca o fogo */
-    --background: 10 85% 8%;
+    /* Fundo escuro semelhante ao fundo da logo */
+    --background: 0 0% 5%;
     --foreground: 0 0% 100%;
 
     /* Cartões */
-    --card: 10 90% 12%;
+    --card: 0 0% 10%;
     --card-foreground: 0 0% 100%;
 
-    /* Primários: tons da chama */
-    --primary: 25 100% 50%; /* Laranja fogo */
-    --primary-light: 35 100% 65%; /* Laranja claro */
+    /* Primário: verde neon como "IRON" */
+    --primary: 130 100% 45%; /* Verde neon vibrante */
+    --primary-light: 130 100% 65%; /* Verde mais claro para gradiente */
 
-    /* Destaque: dourado intenso */
-    --highlight: 45 100% 58%; /* Amarelo dourado */
+    /* Destaque: branco metálico como "PLAY" */
+    --highlight: 0 0% 85%; /* Prata claro / metálico */
 
-    --border: 10 90% 10%;
+    --border: 0 0% 15%;
     --radius: 0.75rem;
   }
 
@@ -33,7 +33,7 @@
     background: linear-gradient(
       180deg,
       hsl(var(--background)) 0%,
-      hsl(10, 100%, 12%) 100%
+      hsl(0, 0%, 10%) 100%
     );
   }
 }
@@ -88,6 +88,7 @@
                 0 4px 6px -4px hsla(var(--primary-light), 0.4);
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
+
   .btn-primary:hover {
     opacity: 0.95;
     transform: scale(1.05);

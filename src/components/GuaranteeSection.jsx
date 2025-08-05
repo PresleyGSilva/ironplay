@@ -11,7 +11,7 @@ const GuaranteeSection = () => {
           decoding="async"
           width={300}
           height={350}
-          src="/assets/garantia7dias.png"
+          src="https://dinoflick.com/wp-content/uploads/2024/12/GARANTIA.webp"
           alt="Garantia 7 dias sem riscos"
           className="rounded-lg shadow-lg"
         />
@@ -25,10 +25,10 @@ const GuaranteeSection = () => {
           </h2>
 
           <p className="mb-3 text-gray-300 leading-relaxed">
-            Sem letras miúdas no contrato: você pode experimentar a <strong>FireFlick</strong> e todos os conteúdos dela <strong>durante 7 dias.</strong>
+            Sem letras miúdas no contrato: você pode experimentar a <strong>IronPlay</strong> e todos os conteúdos dela <strong>durante 7 dias.</strong>
           </p>
           <p className="mb-3 text-gray-300 leading-relaxed">
-            Se dentro desse período você decidir não continuar com a <strong>FireFlick</strong>, por qualquer motivo que seja, é só entrar em contato e nós devolveremos todo o seu dinheiro – sem fazer nenhuma pergunta.
+            Se dentro desse período você decidir não continuar com a <strong>IronPlay</strong>, por qualquer motivo que seja, é só entrar em contato e nós devolveremos todo o seu dinheiro – sem fazer nenhuma pergunta.
           </p>
           <p className="mb-6 text-gray-300 leading-relaxed">
             A partir de agora, você não tem nada a perder.
