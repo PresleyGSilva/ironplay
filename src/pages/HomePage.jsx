@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <>
       <Helmet>
-        <title>IronPlay - O Melhor do Entretenimento em um Só Lugar</title>
+        
         <meta
           name="description"
           content="Filmes, séries, esportes e canais ao vivo com qualidade 4K e estabilidade incomparável."
