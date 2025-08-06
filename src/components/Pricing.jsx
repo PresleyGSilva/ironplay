@@ -81,12 +81,12 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box'
       ],
       isPopular: false,
-      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/plaleq0y/che7o08l',
+      link: 'https://ev.braip.com/checkout/plaleq0y/che7o08l',
       badge: 'OFERTA POR TEMPO LIMITADO',
     },
     {
       name: 'Plano Trimestral',
-      price: 'R$ 34,90',
+      price: 'R$ 33,90',
       period: 'ou 2x de R$ 17,45',
       features: [
         '3 meses de acesso completo',
@@ -97,7 +97,7 @@ const plansData = {
         'Compatível com Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/plavoe6g/che7o08l',
+      link: 'https://ev.braip.com/checkout/plavoe6g/che7o08l',
     },
     {
       name: 'Plano Semestral',
@@ -112,11 +112,11 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/pla1q82n/che7o08l',
+      link: 'https://ev.braip.com/checkout/pla1q82n/che7o08l',
     },
     {
       name: 'Plano Anual',
-      price: 'R$ 109,90',
+      price: 'R$ 110,90',
       period: 'ou 12x de R$ 9,16',
       features: [
         '12 meses de acesso completo',
@@ -127,7 +127,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: true,
-      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/pladvl9q/che7o08l',
+      link: 'https://ev.braip.com/checkout/pladvl9q/che7o08l',
     },
   ],
   cakto: [
