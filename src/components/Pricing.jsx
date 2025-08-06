@@ -81,7 +81,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box'
       ],
       isPopular: false,
-      link: 'https://braip.com/checkout-mensal',
+      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/plaleq0y/che7o08l',
       badge: 'OFERTA POR TEMPO LIMITADO',
     },
     {
@@ -97,7 +97,7 @@ const plansData = {
         'Compatível com Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://braip.com/checkout-trimestral',
+      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/plavoe6g/che7o08l',
     },
     {
       name: 'Plano Semestral',
@@ -112,7 +112,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://braip.com/checkout-semestral',
+      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/pla1q82n/che7o08l',
     },
     {
       name: 'Plano Anual',
@@ -127,7 +127,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: true,
-      link: 'https://braip.com/checkout-anual',
+      link: 'https://ev.braip.com/checkout/pro8n39x/pre-visualizacao/pladvl9q/che7o08l',
     },
   ],
   cakto: [
