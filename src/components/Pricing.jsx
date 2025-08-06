@@ -195,7 +195,7 @@ const plansData = {
 };
 
 const getPlansByPlatform = (platform) => {
-  return plansData[platform] || plansData.kirvano;
+  return plansData[platform] || plansData.cakto;
 };
 
 const PricingCard = ({ plan, index }) => {
@@ -250,9 +250,7 @@ const PricingCard = ({ plan, index }) => {
             ACESSO IMEDIATO
             <span
               aria-hidden="true"
-              className="absolute top-0 left-[-75%] w-20 h-full bg-white/30
-                transform skew-x-[-20deg]
-                animate-[shine_2.5s_linear_infinite]"
+              className="absolute top-0 left-[-75%] w-20 h-full bg-white/30 transform skew-x-[-20deg] animate-[shine_2.5s_linear_infinite]"
             />
           </Button>
         </CardFooter>
@@ -265,9 +263,9 @@ const Pricing = () => {
   const location = useLocation();
   const path = location.pathname;
 
-  let plataforma = 'kirvano'; // padrão
-  if (path.includes('/v2')) plataforma = 'braip';
-  else if (path.includes('/v3')) plataforma = 'cakto';
+  let plataforma = 'cakto'; // novo padrão
+  if (path.includes('/v1')) plataforma = 'braip';
+  else if (path.includes('/v2')) plataforma = 'kirvano';
 
   const plans = getPlansByPlatform(plataforma);
 
@@ -291,16 +289,11 @@ const Pricing = () => {
         </div>
       </div>
 
-      {/* Reflexo shine keyframe */}
       <style>
         {`
           @keyframes shine {
-            0% {
-              left: -75%;
-            }
-            100% {
-              left: 125%;
-            }
+            0% { left: -75%; }
+            100% { left: 125%; }
           }
         `}
       </style>

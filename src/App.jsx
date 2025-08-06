@@ -38,6 +38,9 @@ function App() {
         <Route path="series" element={<SeriesPage />} />
         <Route path="esportes" element={<SportsPage />} />
         <Route path="planos" element={<PlansPage />} />
+        <Route path="v1/planos" element={<PlansPage />} />
+        <Route path="v2/planos" element={<PlansPage />} />
+        <Route path="v3/planos" element={<PlansPage />} />
         <Route path="suporte" element={<SupportPage />} />
       </Route>
     </Routes>

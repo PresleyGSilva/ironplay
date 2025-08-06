@@ -47,7 +47,8 @@ const Footer = () => {
           </p>
           <p>
             Declaramos que o Facebook S/A não tem qualquer vínculo de associação em processos cíveis ou criminais.
-            Nosso email de suporte é: <strong>suporte@kingplay.com.br</strong>
+              Nosso email de suporte é: <strong><a href="mailto:suporte@ironplayoficial.com.br">suporte@ironplayoficial.com.br</a></strong>
+
           </p>
           <p>
             Não compre produtos piratas, não vendemos em marketplaces como: Mercado Livre, Shopee, Aliexpress, Facebook, Olx etc.

@@ -79,7 +79,7 @@ const SportsPage = () => {
           <div className="relative z-10 flex flex-col md:flex-row items-center gap-8">
             <div className="md:w-1/2">
               <h3 className="text-3xl md:text-4xl font-extrabold text-[hsl(var(--primary))] mb-4 leading-snug">
-                Assista aos melhores eventos ao vivo com qualidade IronPlay!
+               
               </h3>
             </div>
           </div>
