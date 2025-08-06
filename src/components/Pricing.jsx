@@ -143,7 +143,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://pay.cakto.com.br/yah7jus',
+      link: 'https://pay.cakto.com.br/tuadxhd',
       badge: 'OFERTA POR TEMPO LIMITADO',
     },
     {
@@ -159,7 +159,7 @@ const plansData = {
         'Compatível com Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://pay.cakto.com.br/34ixret',
+      link: 'https://pay.cakto.com.br/6s2hb5i',
     },
     {
       name: 'Plano Semestral',
@@ -174,7 +174,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://pay.cakto.com.br/z55jwqn',
+      link: 'https://pay.cakto.com.br/9j9b4td',
     },
     {
       name: 'Plano Anual',
@@ -189,7 +189,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: true,
-      link: 'https://pay.cakto.com.br/7gg8spm',
+      link: 'https://pay.cakto.com.br/347v4vm',
     },
   ],
 };
