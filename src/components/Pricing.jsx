@@ -24,7 +24,7 @@ const plansData = {
     },
     {
       name: 'Plano Trimestral',
-      price: 'R$ 34,90',
+      price: 'R$ 33,90',
       period: 'ou 2x de R$ 17,45',
       features: [
         '3 meses de acesso completo',
@@ -54,7 +54,7 @@ const plansData = {
     },
     {
       name: 'Plano Anual',
-      price: 'R$ 109,90',
+      price: 'R$ 110,90',
       period: 'ou 12x de R$ 9,16',
       features: [
         '12 meses de acesso completo',
@@ -148,7 +148,7 @@ const plansData = {
     },
     {
       name: 'Plano Trimestral',
-      price: 'R$ 34,90',
+      price: 'R$ 33,90',
       period: 'ou 2x de R$ 17,45',
       features: [
         '3 meses de acesso completo',
@@ -178,7 +178,7 @@ const plansData = {
     },
     {
       name: 'Plano Anual',
-      price: 'R$ 109,90',
+      price: 'R$ 110,90',
       period: 'ou 12x de R$ 9,16',
       features: [
         '12 meses de acesso completo',
