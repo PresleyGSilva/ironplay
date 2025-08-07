@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
 import Hero from '@/components/Hero';
@@ -12,10 +12,14 @@ import Faq from '@/components/Faq';
 import GuaranteeSection from '@/components/GuaranteeSection';
 
 const HomePage = () => {
+  // ⬇️ Isso força o scroll para o topo sempre que o HomePage for montado
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <Helmet>
-        
         <meta
           name="description"
           content="Filmes, séries, esportes e canais ao vivo com qualidade 4K e estabilidade incomparável."
@@ -26,8 +30,6 @@ const HomePage = () => {
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap"
           rel="stylesheet"
         />
-
-        {/* Favicon - logo na aba do navegador */}
         <link rel="icon" href="/public/favicon.ico" type="image/icon" />
       </Helmet>
 
@@ -37,10 +39,7 @@ const HomePage = () => {
       <Benefits />
       <Testimonials />
       <AvailableContent />
-
-      {/* Garantia 7 dias sem riscos */}
       <GuaranteeSection />
-
       <Pricing />
       <Faq />
     </>

@@ -1,7 +1,10 @@
+// App.jsx
 import React from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop'; // ⬅️ Importar aqui
+
 import HomePage from '@/pages/HomePage';
 import MoviesPage from '@/pages/MoviesPage';
 import SeriesPage from '@/pages/SeriesPage';
@@ -13,6 +16,8 @@ const AppLayout = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
+      {/* ⬇️ ScrollToTop aqui dentro do layout, assim funciona com todas as rotas filhas */}
+      <ScrollToTop />
       <main className="flex-grow">
         <Outlet />
       </main>
@@ -25,15 +30,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<AppLayout />}>
-        {/* Página principal */}
         <Route index element={<HomePage />} />
-
-        {/* Acessos alternativos com a mesma estrutura */}
         <Route path="v1" element={<HomePage />} />
         <Route path="v2" element={<HomePage />} />
         <Route path="v3" element={<HomePage />} />
-
-        {/* Outras páginas */}
         <Route path="filmes" element={<MoviesPage />} />
         <Route path="series" element={<SeriesPage />} />
         <Route path="esportes" element={<SportsPage />} />

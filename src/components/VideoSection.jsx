@@ -154,11 +154,11 @@ const VideoSection = () => {
           </button>
 
           {/* Botão "Assista agora" */}
-          <Link to="/planos">
+          <a href="#planos">
             <button className="absolute bottom-4 left-4 z-10 bg-primary text-white px-6 py-3 rounded-full shadow-lg text-lg">
               Assista Agora
             </button>
-          </Link>
+          </a>
         </div>
       </div>
     </section>
