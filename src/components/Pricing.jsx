@@ -19,7 +19,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box'
       ],
       isPopular: false,
-      link: 'https://kirvano.com/checkout-mensal',
+      link: 'https://pay.kirvano.com/516a7439-374b-40fd-8054-438f1a52892a',
       badge: 'OFERTA POR TEMPO LIMITADO',
     },
     {
@@ -35,7 +35,7 @@ const plansData = {
         'Compatível com Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://kirvano.com/checkout-trimestral',
+      link: 'https://pay.kirvano.com/3e2c0b27-5713-45e1-a132-b5f7f134d0dd',
     },
     {
       name: 'Plano Semestral',
@@ -50,7 +50,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: false,
-      link: 'https://kirvano.com/checkout-semestral',
+      link: 'https://pay.kirvano.com/9f83c306-7291-4abf-93c9-86d8a6e7620f',
     },
     {
       name: 'Plano Anual',
@@ -65,7 +65,7 @@ const plansData = {
         'Smart TV, Tablet, PC, TV Box',
       ],
       isPopular: true,
-      link: 'https://kirvano.com/checkout-anual',
+      link: 'https://pay.kirvano.com/ff6be0a7-5687-41b5-8df8-6810ee03d1b6',
     },
   ],
   braip: [
