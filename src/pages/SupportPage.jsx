@@ -12,7 +12,7 @@ const SupportPage = () => {
   // Função de redirecionamento para o link do Telegram
   const handleRedirectToTelegram = () => {
     // Redireciona para o Telegram
-    window.location.href = "https://t.me/SuporteCineFlick"; // Link do chat do Telegram
+    window.location.href = "https://wa.me/message/6RHNBJB7PCIPN1"; // Link do chat do Telegram
   };
 
   const handleActionClick = (channel) => {
