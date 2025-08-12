@@ -3,7 +3,8 @@ import React from 'react';
 import { Routes, Route, Outlet } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ScrollToTop from '@/components/ScrollToTop'; // ⬅️ Importar aqui
+import ScrollToTop from '@/components/ScrollToTop';
+import WhatsAppButton from '@/components/WhatsAppButton'; // ⬅️ Importa aqui
 
 import HomePage from '@/pages/HomePage';
 import MoviesPage from '@/pages/MoviesPage';
@@ -16,12 +17,14 @@ const AppLayout = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      {/* ⬇️ ScrollToTop aqui dentro do layout, assim funciona com todas as rotas filhas */}
       <ScrollToTop />
       <main className="flex-grow">
         <Outlet />
       </main>
       <Footer />
+
+      {/* Botão fixo do WhatsApp visível em todas as páginas */}
+      <WhatsAppButton />
     </div>
   );
 };
