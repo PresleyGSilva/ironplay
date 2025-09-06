@@ -5,9 +5,10 @@ import { Clapperboard, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
+import { useVersionPrefix } from '@/hooks/useVersionPrefix'; // ⬅️ IMPORTANTE
 
 const navLinks = [
-  { name: 'Home', path: '/' },
+  { name: 'Home', path: '' },       // ✅ sem barra, vamos montar dinamicamente
   { name: 'Filmes', path: '/filmes' },
   { name: 'Séries', path: '/series' },
   { name: 'Esportes', path: '/esportes' },
@@ -18,6 +19,7 @@ const navLinks = [
 const Header = () => {
   const { toast } = useToast();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const prefix = useVersionPrefix(); // ✅ pega o prefixo atual da versão
 
   const handleLoginClick = () => {
     toast({
@@ -41,7 +43,7 @@ const Header = () => {
     >
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <NavLink to="/" className="flex items-center gap-2">
+        <NavLink to={`${prefix || '/'}`} className="flex items-center gap-2">
           <Clapperboard className="h-8 w-8 text-primary" />
           <span className="text-2xl font-black tracking-tighter text-white">IronPlay</span>
         </NavLink>
@@ -49,7 +51,11 @@ const Header = () => {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6">
           {navLinks.map(link => (
-            <NavLink key={link.name} to={link.path} className={navLinkClass}>
+            <NavLink
+              key={link.name}
+              to={`${prefix}${link.path}`} // ✅ monta a rota com prefixo
+              className={navLinkClass}
+            >
               {link.name}
             </NavLink>
           ))}
@@ -90,7 +96,7 @@ const Header = () => {
             {navLinks.map(link => (
               <NavLink
                 key={link.name}
-                to={link.path}
+                to={`${prefix}${link.path}`} // ✅ mantém a versão atual
                 onClick={() => setIsMenuOpen(false)}
                 className="text-white text-base font-medium px-2 py-1 hover:text-primary"
               >
