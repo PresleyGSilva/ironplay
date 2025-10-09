@@ -11,7 +11,7 @@ const SupportPage = () => {
 
   // Função de redirecionamento para o WhatsApp
   const handleRedirectToWhatsApp = () => {
-    window.location.href = "https://wa.me/556281624974"; // Link direto do WhatsApp
+    window.location.href = "https://wa.me/5562981914800"; // Link direto do WhatsApp
   };
 
   const handleActionClick = (channel) => {
