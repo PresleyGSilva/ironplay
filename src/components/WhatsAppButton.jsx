@@ -3,7 +3,7 @@ import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppButton = () => {
-  const phoneNumber = '5562981914800'; // seu número com DDI (55 para Brasil)
+  const phoneNumber = '5511977992046'; // seu número com DDI (55 para Brasil)
   const message = 'Olá, quero mais informações!';
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
