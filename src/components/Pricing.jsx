@@ -9,7 +9,7 @@ const plansData = {
   kirvano: [
     {
       name: 'Plano Mensal',
-      price: 'R$ 16,90',
+      price: 'R$ 18,90',
       period: 'à vista',
       features: [
         '1 mês de acesso completo',
@@ -24,8 +24,8 @@ const plansData = {
     },
     {
       name: 'Plano Trimestral',
-      price: 'R$ 33,90',
-      period: 'ou 2x de R$ 17,45',
+      price: 'R$ 38,90',
+      period: 'ou 2x de R$ 19,45',
       features: [
         '3 meses de acesso completo',
         'Assista em 1 tela simultânea',
@@ -39,8 +39,8 @@ const plansData = {
     },
     {
       name: 'Plano Semestral',
-      price: 'R$ 59,90',
-      period: 'ou 3x de R$ 19,97',
+      price: 'R$ 68,90',
+      period: 'ou 3x de R$ 22,97',
       features: [
         '6 meses de acesso completo',
         'Assista em 1 tela simultânea',
@@ -54,8 +54,8 @@ const plansData = {
     },
     {
       name: 'Plano Anual',
-      price: 'R$ 110,90',
-      period: 'ou 12x de R$ 9,16',
+      price: 'R$ 128,90',
+      period: 'ou 12x de R$ 10,74',
       features: [
         '12 meses de acesso completo',
         'Assista em 2 telas simultâneas',
@@ -71,7 +71,7 @@ const plansData = {
   braip: [
     {
       name: 'Plano Mensal',
-      price: 'R$ 16,90',
+      price: 'R$ 18,90',
       period: 'à vista',
       features: [
         '1 mês de acesso completo',
@@ -86,8 +86,8 @@ const plansData = {
     },
     {
       name: 'Plano Trimestral',
-      price: 'R$ 33,90',
-      period: 'ou 2x de R$ 17,45',
+      price: 'R$ 38,90',
+      period: 'ou 2x de R$ 19,45',
       features: [
         '3 meses de acesso completo',
         'Assista em 1 tela simultânea',
@@ -101,8 +101,8 @@ const plansData = {
     },
     {
       name: 'Plano Semestral',
-      price: 'R$ 59,90',
-      period: 'ou 3x de R$ 19,97',
+      price: 'R$ 68,90',
+      period: 'ou 3x de R$ 22,97',
       features: [
         '6 meses de acesso completo',
         'Assista em 1 tela simultânea',
@@ -116,8 +116,8 @@ const plansData = {
     },
     {
       name: 'Plano Anual',
-      price: 'R$ 110,90',
-      period: 'ou 12x de R$ 9,16',
+      price: 'R$ 128,90',
+      period: 'ou 12x de R$ 10,74',
       features: [
         '12 meses de acesso completo',
         'Assista em 2 telas simultâneas',
@@ -133,7 +133,7 @@ const plansData = {
   cakto: [
     {
       name: 'Plano Mensal',
-      price: 'R$ 16,90',
+      price: 'R$ 18,90',
       period: 'à vista',
       features: [
         '1 mês de acesso completo',
@@ -148,8 +148,8 @@ const plansData = {
     },
     {
       name: 'Plano Trimestral',
-      price: 'R$ 33,90',
-      period: 'ou 2x de R$ 17,45',
+      price: 'R$ 38,90',
+      period: 'ou 2x de R$ 19,45',
       features: [
         '3 meses de acesso completo',
         'Assista em 1 tela simultânea',
@@ -163,8 +163,8 @@ const plansData = {
     },
     {
       name: 'Plano Semestral',
-      price: 'R$ 59,90',
-      period: 'ou 3x de R$ 19,97',
+      price: 'R$ 68,90',
+      period: 'ou 3x de R$ 22,97',
       features: [
         '6 meses de acesso completo',
         'Assista em 1 tela simultânea',
@@ -178,8 +178,8 @@ const plansData = {
     },
     {
       name: 'Plano Anual',
-      price: 'R$ 110,90',
-      period: 'ou 12x de R$ 9,16',
+      price: 'R$ 128,90',
+      period: 'ou 12x de R$ 10,74',
       features: [
         '12 meses de acesso completo',
         'Assista em 2 telas simultâneas',
@@ -263,7 +263,7 @@ const Pricing = () => {
   const location = useLocation();
   const path = location.pathname;
 
-  let plataforma = 'cakto'; // novo padrão
+  let plataforma = 'cakto';
   if (path.includes('/v1')) plataforma = 'braip';
   else if (path.includes('/v2')) plataforma = 'kirvano';
 
