@@ -5,11 +5,21 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from '@/componen
 import { Button } from '@/components/ui/button';
 import { CheckCircle2 } from 'lucide-react';
 
+// 🧮 Função para calcular economia
+function calcularEconomia(precoMensal, precoTotal, meses) {
+  if (!meses || meses <= 1) return 0;
+  const custoMensal = precoTotal / meses;
+  const economia = ((precoMensal - custoMensal) / precoMensal) * 100;
+  return Math.round(economia);
+}
+
 const plansData = {
   kirvano: [
     {
       name: 'Plano Mensal',
       price: 'R$ 18,90',
+      value: 18.90,
+      months: 1,
       period: 'à vista',
       features: [
         '1 mês de acesso completo',
@@ -25,6 +35,8 @@ const plansData = {
     {
       name: 'Plano Trimestral',
       price: 'R$ 38,90',
+      value: 38.90,
+      months: 3,
       period: 'ou 2x de R$ 19,45',
       features: [
         '3 meses de acesso completo',
@@ -34,12 +46,13 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Compatível com Smart TV, Tablet, PC, TV Box',
       ],
-      isPopular: false,
       link: 'https://pay.kirvano.com/3e2c0b27-5713-45e1-a132-b5f7f134d0dd',
     },
     {
       name: 'Plano Semestral',
       price: 'R$ 68,90',
+      value: 68.90,
+      months: 6,
       period: 'ou 3x de R$ 22,97',
       features: [
         '6 meses de acesso completo',
@@ -49,12 +62,13 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Smart TV, Tablet, PC, TV Box',
       ],
-      isPopular: false,
       link: 'https://pay.kirvano.com/9f83c306-7291-4abf-93c9-86d8a6e7620f',
     },
     {
       name: 'Plano Anual',
       price: 'R$ 128,90',
+      value: 128.90,
+      months: 12,
       period: 'ou 12x de R$ 10,74',
       features: [
         '12 meses de acesso completo',
@@ -72,6 +86,8 @@ const plansData = {
     {
       name: 'Plano Mensal',
       price: 'R$ 18,90',
+      value: 18.90,
+      months: 1,
       period: 'à vista',
       features: [
         '1 mês de acesso completo',
@@ -80,13 +96,14 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Smart TV, Tablet, PC, TV Box'
       ],
-      isPopular: false,
       link: 'https://ev.braip.com/checkout/plaleq0y/che7o08l',
       badge: 'OFERTA POR TEMPO LIMITADO',
     },
     {
       name: 'Plano Trimestral',
       price: 'R$ 38,90',
+      value: 38.90,
+      months: 3,
       period: 'ou 2x de R$ 19,45',
       features: [
         '3 meses de acesso completo',
@@ -96,12 +113,13 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Compatível com Smart TV, Tablet, PC, TV Box',
       ],
-      isPopular: false,
       link: 'https://ev.braip.com/checkout/plavoe6g/che7o08l',
     },
     {
       name: 'Plano Semestral',
       price: 'R$ 68,90',
+      value: 68.90,
+      months: 6,
       period: 'ou 3x de R$ 22,97',
       features: [
         '6 meses de acesso completo',
@@ -111,12 +129,13 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Smart TV, Tablet, PC, TV Box',
       ],
-      isPopular: false,
       link: 'https://ev.braip.com/checkout/pla1q82n/che7o08l',
     },
     {
       name: 'Plano Anual',
       price: 'R$ 128,90',
+      value: 128.90,
+      months: 12,
       period: 'ou 12x de R$ 10,74',
       features: [
         '12 meses de acesso completo',
@@ -134,6 +153,8 @@ const plansData = {
     {
       name: 'Plano Mensal',
       price: 'R$ 18,90',
+      value: 18.90,
+      months: 1,
       period: 'à vista',
       features: [
         '1 mês de acesso completo',
@@ -142,13 +163,14 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Smart TV, Tablet, PC, TV Box',
       ],
-      isPopular: false,
       link: 'https://pay.cakto.com.br/tuadxhd',
       badge: 'OFERTA POR TEMPO LIMITADO',
     },
     {
       name: 'Plano Trimestral',
       price: 'R$ 38,90',
+      value: 38.90,
+      months: 3,
       period: 'ou 2x de R$ 19,45',
       features: [
         '3 meses de acesso completo',
@@ -158,12 +180,13 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Compatível com Smart TV, Tablet, PC, TV Box',
       ],
-      isPopular: false,
       link: 'https://pay.cakto.com.br/6s2hb5i',
     },
     {
       name: 'Plano Semestral',
       price: 'R$ 68,90',
+      value: 68.90,
+      months: 6,
       period: 'ou 3x de R$ 22,97',
       features: [
         '6 meses de acesso completo',
@@ -173,12 +196,13 @@ const plansData = {
         'Qualidade SD/HD/FHD/4K',
         'Smart TV, Tablet, PC, TV Box',
       ],
-      isPopular: false,
       link: 'https://pay.cakto.com.br/9j9b4td',
     },
     {
       name: 'Plano Anual',
       price: 'R$ 128,90',
+      value: 128.90,
+      months: 12,
       period: 'ou 12x de R$ 10,74',
       features: [
         '12 meses de acesso completo',
@@ -194,11 +218,11 @@ const plansData = {
   ],
 };
 
-const getPlansByPlatform = (platform) => {
-  return plansData[platform] || plansData.cakto;
-};
+const getPlansByPlatform = (platform) => plansData[platform] || plansData.cakto;
 
-const PricingCard = ({ plan, index }) => {
+const PricingCard = ({ plan, index, precoMensal }) => {
+  const economia = calcularEconomia(precoMensal, plan.value, plan.months);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -225,11 +249,19 @@ const PricingCard = ({ plan, index }) => {
         </CardHeader>
 
         <CardContent className="flex flex-col items-center text-center mb-3 px-2">
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl md:text-3xl font-extrabold text-[hsl(var(--primary))] whitespace-nowrap leading-none">
-              {plan.price}
-            </span>
-            <span className="text-gray-400 text-xs md:text-sm leading-none">{plan.period}</span>
+          <div className="flex flex-col items-center">
+            <div className="flex items-baseline gap-1">
+              <span className="text-2xl md:text-3xl font-extrabold text-[hsl(var(--primary))] whitespace-nowrap leading-none">
+                {plan.price}
+              </span>
+              <span className="text-gray-400 text-xs md:text-sm leading-none">{plan.period}</span>
+            </div>
+
+            {economia > 0 && (
+              <span className="text-green-400 text-xs font-semibold mt-1">
+                💸 Economize {economia}% comparado ao mensal
+              </span>
+            )}
           </div>
 
           <ul className="text-xs md:text-sm text-gray-200 space-y-1 mt-3 w-full text-left leading-tight">
@@ -268,6 +300,7 @@ const Pricing = () => {
   else if (path.includes('/v2')) plataforma = 'kirvano';
 
   const plans = getPlansByPlatform(plataforma);
+  const precoMensal = plans.find((p) => p.months === 1)?.value || 18.9;
 
   return (
     <section id="planos" className="py-20 px-6 bg-[#0b0b0b] text-white">
@@ -284,7 +317,7 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {plans.map((plan, index) => (
-            <PricingCard key={index} plan={plan} index={index} />
+            <PricingCard key={index} plan={plan} index={index} precoMensal={precoMensal} />
           ))}
         </div>
       </div>
