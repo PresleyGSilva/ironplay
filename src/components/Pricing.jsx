@@ -325,8 +325,11 @@ const Pricing = () => {
   else if (path.includes('/v2')) plataforma = 'kirvano';
   else if (path.includes('/v3')) plataforma = 'vekssell';
 
-  // Sempre adiciona o plano teste no topo
-  const plans = [planoTeste, ...getPlansByPlatform(plataforma)];
+  // 🔥 SOMENTE V1 RECEBE O PLANO DE TESTE
+  const plans =
+    plataforma === 'vekssell' && path.includes('/v1')
+      ? [planoTeste, ...getPlansByPlatform(plataforma)]
+      : getPlansByPlatform(plataforma);
 
   const precoMensal = plans.find((p) => p.months === 1)?.value || 18.9;
 
@@ -361,5 +364,6 @@ const Pricing = () => {
     </section>
   );
 };
+
 
 export default Pricing;
