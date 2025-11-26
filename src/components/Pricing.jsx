@@ -13,6 +13,7 @@ function calcularEconomia(precoMensal, precoTotal, meses) {
   return Math.round(economia);
 }
 
+// 🔥 TODOS OS PLANOS (KIRVANO / BRAIP / CAKTO / VEKSSSELL)
 const plansData = {
   kirvano: [
     {
@@ -82,6 +83,7 @@ const plansData = {
       link: 'https://pay.kirvano.com/ff6be0a7-5687-41b5-8df8-6810ee03d1b6',
     },
   ],
+
   braip: [
     {
       name: 'Plano Mensal',
@@ -149,6 +151,7 @@ const plansData = {
       link: 'https://ev.braip.com/checkout/pladvl9q/che7o08l',
     },
   ],
+
   cakto: [
     {
       name: 'Plano Mensal',
@@ -216,10 +219,81 @@ const plansData = {
       link: 'https://pay.cakto.com.br/347v4vm',
     },
   ],
+
+  // 🔥🔥🔥 **Vekssell — usado pela rota /v3**
+  vekssell: [
+    {
+      name: 'Plano Mensal',
+      price: 'R$ 18,90',
+      value: 18.90,
+      months: 1,
+      period: 'à vista',
+      features: [
+        '1 mês de acesso completo',
+        'Assista em 1 tela simultânea',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      link: 'https://checkout.vekssell.com.br/checkout/cmiftuu7b0grw5bskjyvc86kh?offer=V27TFJ2',
+      badge: 'OFERTA POR TEMPO LIMITADO',
+    },
+    {
+      name: 'Plano Trimestral',
+      price: 'R$ 38,90',
+      value: 38.90,
+      months: 3,
+      period: 'ou 2x de R$ 19,45',
+      features: [
+        '3 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Compatível com Smart TV, Tablet, PC, TV Box',
+      ],
+      link: 'https://checkout.vekssell.com.br/checkout/cmiftuu7b0grw5bskjyvc86kh?offer=TCQ19O0',
+    },
+    {
+      name: 'Plano Semestral',
+      price: 'R$ 68,90',
+      value: 68.90,
+      months: 6,
+      period: 'ou 3x de R$ 22,97',
+      features: [
+        '6 meses de acesso completo',
+        'Assista em 1 tela simultânea',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      link: 'https://checkout.vekssell.com.br/checkout/cmiftuu7b0grw5bskjyvc86kh?offer=HWYC7YH',
+    },
+    {
+      name: 'Plano Anual',
+      price: 'R$ 128,90',
+      value: 128.90,
+      months: 12,
+      period: 'ou 12x de R$ 10,74',
+      features: [
+        '12 meses de acesso completo',
+        'Assista em 2 telas simultâneas',
+        'Canais Adultos (opcional)',
+        '+ de 40 mil conteúdos',
+        'Qualidade SD/HD/FHD/4K',
+        'Smart TV, Tablet, PC, TV Box',
+      ],
+      isPopular: true,
+      link: 'https://checkout.vekssell.com.br/checkout/cmiftuu7b0grw5bskjyvc86kh?offer=2T3SIFK',
+    },
+  ],
 };
 
+// 🔎 Função auxiliar
 const getPlansByPlatform = (platform) => plansData[platform] || plansData.cakto;
 
+// Card do plano
 const PricingCard = ({ plan, index, precoMensal }) => {
   const economia = calcularEconomia(precoMensal, plan.value, plan.months);
 
@@ -291,13 +365,16 @@ const PricingCard = ({ plan, index, precoMensal }) => {
   );
 };
 
+// 🌟 COMPONENTE PRINCIPAL
 const Pricing = () => {
   const location = useLocation();
   const path = location.pathname;
 
+  // Detecta plataforma pela rota
   let plataforma = 'cakto';
   if (path.includes('/v1')) plataforma = 'braip';
   else if (path.includes('/v2')) plataforma = 'kirvano';
+  else if (path.includes('/v3')) plataforma = 'vekssell';
 
   const plans = getPlansByPlatform(plataforma);
   const precoMensal = plans.find((p) => p.months === 1)?.value || 18.9;
