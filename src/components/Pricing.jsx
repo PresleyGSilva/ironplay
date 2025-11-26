@@ -13,7 +13,25 @@ function calcularEconomia(precoMensal, precoTotal, meses) {
   return Math.round(economia);
 }
 
-// 🔥 TODOS OS PLANOS (KIRVANO / BRAIP / CAKTO / VEKSSSELL)
+// ⭐ PLANO DE TESTE UNIVERSAL (aparece em TODAS as páginas)
+const planoTeste = {
+  name: 'Teste por 24 Horas!',
+  price: 'R$ 4,90',
+  value: 4.90,
+  months: 0.03, // (1 dia)
+  period: 'acesso imediato',
+  features: [
+    '24 horas de acesso completo',
+    'Assista em 1 tela',
+    '+ de 40 mil conteúdos',
+    'Filmes / Séries / Canais AO VIVO',
+    'Qualidade SD/HD/FHD/4K',
+  ],
+  badge: 'PLANO DE TESTE',
+  link: 'https://checkout.vekssell.com.br/checkout/cmifvz9gu0hdooxohd9xlgdah?offer=8F3MXUL'
+};
+
+// 🔥 PLANOS Cakto / Kirvano / Vekssell
 const plansData = {
   kirvano: [
     {
@@ -81,74 +99,6 @@ const plansData = {
       ],
       isPopular: true,
       link: 'https://pay.kirvano.com/ff6be0a7-5687-41b5-8df8-6810ee03d1b6',
-    },
-  ],
-
-  braip: [
-    {
-      name: 'Plano Mensal',
-      price: 'R$ 18,90',
-      value: 18.90,
-      months: 1,
-      period: 'à vista',
-      features: [
-        '1 mês de acesso completo',
-        'Assista em 1 tela simultânea',
-        '+ de 40 mil conteúdos',
-        'Qualidade SD/HD/FHD/4K',
-        'Smart TV, Tablet, PC, TV Box'
-      ],
-      link: 'https://ev.braip.com/checkout/plaleq0y/che7o08l',
-      badge: 'OFERTA POR TEMPO LIMITADO',
-    },
-    {
-      name: 'Plano Trimestral',
-      price: 'R$ 38,90',
-      value: 38.90,
-      months: 3,
-      period: 'ou 2x de R$ 19,45',
-      features: [
-        '3 meses de acesso completo',
-        'Assista em 1 tela simultânea',
-        'Canais Adultos (opcional)',
-        '+ de 40 mil conteúdos',
-        'Qualidade SD/HD/FHD/4K',
-        'Compatível com Smart TV, Tablet, PC, TV Box',
-      ],
-      link: 'https://ev.braip.com/checkout/plavoe6g/che7o08l',
-    },
-    {
-      name: 'Plano Semestral',
-      price: 'R$ 68,90',
-      value: 68.90,
-      months: 6,
-      period: 'ou 3x de R$ 22,97',
-      features: [
-        '6 meses de acesso completo',
-        'Assista em 1 tela simultânea',
-        'Canais Adultos (opcional)',
-        '+ de 40 mil conteúdos',
-        'Qualidade SD/HD/FHD/4K',
-        'Smart TV, Tablet, PC, TV Box',
-      ],
-      link: 'https://ev.braip.com/checkout/pla1q82n/che7o08l',
-    },
-    {
-      name: 'Plano Anual',
-      price: 'R$ 128,90',
-      value: 128.90,
-      months: 12,
-      period: 'ou 12x de R$ 10,74',
-      features: [
-        '12 meses de acesso completo',
-        'Assista em 2 telas simultâneas',
-        'Canais Adultos (opcional)',
-        '+ de 40 mil conteúdos',
-        'Qualidade SD/HD/FHD/4K',
-        'Smart TV, Tablet, PC, TV Box',
-      ],
-      isPopular: true,
-      link: 'https://ev.braip.com/checkout/pladvl9q/che7o08l',
     },
   ],
 
@@ -220,7 +170,6 @@ const plansData = {
     },
   ],
 
-  // 🔥🔥🔥 **Vekssell — usado pela rota /v3**
   vekssell: [
     {
       name: 'Plano Mensal',
@@ -290,10 +239,10 @@ const plansData = {
   ],
 };
 
-// 🔎 Função auxiliar
+// Função auxiliar
 const getPlansByPlatform = (platform) => plansData[platform] || plansData.cakto;
 
-// Card do plano
+// Card
 const PricingCard = ({ plan, index, precoMensal }) => {
   const economia = calcularEconomia(precoMensal, plan.value, plan.months);
 
@@ -370,13 +319,15 @@ const Pricing = () => {
   const location = useLocation();
   const path = location.pathname;
 
-  // Detecta plataforma pela rota
+  // Definição da plataforma por rota
   let plataforma = 'cakto';
-  if (path.includes('/v1')) plataforma = 'braip';
+  if (path.includes('/v1')) plataforma = 'vekssell'; 
   else if (path.includes('/v2')) plataforma = 'kirvano';
   else if (path.includes('/v3')) plataforma = 'vekssell';
 
-  const plans = getPlansByPlatform(plataforma);
+  // Sempre adiciona o plano teste no topo
+  const plans = [planoTeste, ...getPlansByPlatform(plataforma)];
+
   const precoMensal = plans.find((p) => p.months === 1)?.value || 18.9;
 
   return (
